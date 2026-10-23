@@ -1,0 +1,38 @@
+# Supabase CLI – lokale Entwicklung (`supabase start`). Nicht gesetzte Werte = CLI-Defaults.
+project_id = "arge-fechingen-website"
+
+[api]
+schemas = ["public", "graphql_public"]
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[auth]
+site_url = "http://localhost:4200"
+additional_redirect_urls = [
+  "http://localhost:4200/admin/passwort-setzen",
+  "https://arge-fechingen.de/admin/passwort-setzen",
+]
+# Keine Selbstregistrierung – neue Benutzer nur per Einladung
+enable_signup = false
+
+[auth.email]
+enable_signup = false
+enable_confirmations = false
+
+# JWT wird in den Funktionen selbst geprüft (funktioniert auch mit Publishable Keys)
+[functions.invite-user]
+verify_jwt = false
+
+[functions.manage-user]
+verify_jwt = false
+
+[functions.newsletter-subscribe]
+verify_jwt = false
+
+[functions.newsletter-confirm]
+verify_jwt = false
+
+[functions.newsletter-unsubscribe]
+verify_jwt = false
