@@ -1,0 +1,31 @@
+<article class="page container">
+  <h1>Der Vorstand</h1>
+  <app-todo>Inhalte zum Vorstand folgen (Fotos, Namen, Funktionen und Texte in vorstand.data.ts eintragen)</app-todo>
+
+  <figure class="group">
+    @if (gruppenbild.src) {
+      <img [src]="gruppenbild.src" [alt]="gruppenbild.alt" width="1200" height="800" />
+    } @else {
+      <div class="photo-placeholder group-placeholder" role="img" [attr.aria-label]="'Platzhalter: ' + gruppenbild.alt">
+        TODO: Gruppenbild
+      </div>
+    }
+    <figcaption>Foto: {{ gruppenbild.credit }}</figcaption>
+  </figure>
+
+  <h2>Mitglieder</h2>
+  <ul class="grid members">
+    @for (m of mitglieder; track $index) {
+      <li class="card member">
+        @if (m.foto) {
+          <img [src]="m.foto" [alt]="'Foto von ' + m.name" width="320" height="320" loading="lazy" />
+        } @else {
+          <div class="photo-placeholder" role="img" aria-label="Platzhalter für Foto">TODO: Foto</div>
+        }
+        <h3>{{ m.name }}</h3>
+        <p class="role">{{ m.funktion }}</p>
+        <p>{{ m.text }}</p>
+      </li>
+    }
+  </ul>
+</article>

@@ -3,11 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "env": "node scripts/write-env.mjs",
+    "prestart": "npm run env",
     "start": "ng serve",
+    "prebuild": "npm run env",
     "build": "ng build",
+    "build:vercel": "npm run build && node scripts/vercel-output.mjs",
     "watch": "ng build --watch --configuration development",
+    "pretest": "npm run env",
     "test": "ng test",
-    "serve:ssr:arge-fechingen-website": "node dist/arge-fechingen-website/server/server.mjs"
+    "lint": "ng lint",
+    "serve:ssr": "node dist/arge-fechingen-website/server/server.mjs",
+    "supabase:types": "supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/app/core/database.types.ts",
+    "supabase:types:local": "supabase gen types typescript --local --schema public > src/app/core/database.types.ts"
   },
   "private": true,
   "packageManager": "npm@12.0.2",
@@ -20,7 +28,9 @@
     "@angular/platform-server": "^22.2.0",
     "@angular/router": "^22.2.0",
     "@angular/ssr": "^22.2.4",
+    "@supabase/supabase-js": "^2.118.0",
     "express": "^5.1.0",
+    "marked": "^18.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -28,11 +38,18 @@
     "@angular/build": "^22.2.4",
     "@angular/cli": "^22.2.4",
     "@angular/compiler-cli": "^22.2.0",
+    "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.1",
     "@types/node": "^22.12.0",
+    "angular-eslint": "22.6.0",
+    "eslint": "^10.12.0",
     "jsdom": "^30.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
+    "typescript-eslint": "8.71.0",
     "vitest": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

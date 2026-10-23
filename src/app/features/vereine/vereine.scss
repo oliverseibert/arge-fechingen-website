@@ -1,0 +1,21 @@
+.clubs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-3);
+  margin: 0;
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+}

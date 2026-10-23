@@ -1,0 +1,55 @@
+.group {
+  margin: 0 0 var(--space-5);
+
+  img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+
+  figcaption {
+    margin-top: var(--space-2);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+}
+
+.photo-placeholder {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background: var(--color-surface);
+  border: 2px dashed var(--color-todo-border);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.group-placeholder {
+  aspect-ratio: 3 / 2;
+}
+
+.members {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.member {
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: var(--space-3);
+  }
+
+  h3 {
+    margin-bottom: var(--space-1);
+  }
+}
+
+.role {
+  color: var(--color-blue-dark);
+  font-weight: 600;
+}
