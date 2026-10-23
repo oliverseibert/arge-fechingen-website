@@ -1,0 +1,104 @@
+<h1>Benutzer verwalten</h1>
+
+<section class="card invite" aria-labelledby="invite-title">
+  <h2 id="invite-title">Neuen Benutzer einladen</h2>
+  <form [formGroup]="inviteForm" (ngSubmit)="invite()">
+    <div class="row">
+      <div class="form-field">
+        <label for="inv-email">E-Mail-Adresse</label>
+        <input id="inv-email" type="email" formControlName="email" required autocomplete="off" />
+        @if (inviteForm.controls.email.touched && inviteForm.controls.email.invalid) {
+          <span class="error">Bitte eine gültige E-Mail-Adresse eingeben.</span>
+        }
+      </div>
+      <div class="form-field">
+        <label for="inv-name">Name</label>
+        <input id="inv-name" type="text" formControlName="name" autocomplete="off" />
+      </div>
+      <div class="form-field">
+        <label for="inv-role">Rolle</label>
+        <select id="inv-role" formControlName="role">
+          @for (r of roles; track r[0]) {
+            <option [value]="r[0]">{{ r[1] }}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn" [disabled]="inviting()">{{ inviting() ? 'Wird eingeladen …' : 'Einladung senden' }}</button>
+  </form>
+</section>
+
+@if (message()) {
+  <p class="alert" [class.alert-error]="message()!.error" role="status">{{ message()!.text }}</p>
+}
+
+@if (users.isLoading()) {
+  <p aria-live="polite">Wird geladen …</p>
+} @else if (users.error()) {
+  <p class="alert alert-error" role="alert">Die Benutzer konnten nicht geladen werden.</p>
+} @else {
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name / E-Mail</th>
+          <th scope="col">Rolle</th>
+          <th scope="col">Status</th>
+          <th scope="col">Angelegt</th>
+          <th scope="col"><span class="visually-hidden">Aktionen</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users.value(); track user.id) {
+          <tr>
+            <td>
+              <strong>{{ user.name || '–' }}</strong><br />
+              {{ user.email }}
+              @if (isSelf(user)) {
+                <span class="badge">Sie</span>
+              }
+            </td>
+            <td>
+              @if (isSelf(user)) {
+                {{ roleLabel(user.role) }}
+              } @else {
+                <label class="visually-hidden" [for]="'role-' + user.id">Rolle von {{ user.email }}</label>
+                <select
+                  [id]="'role-' + user.id"
+                  [value]="user.role"
+                  [disabled]="busyId() === user.id"
+                  (change)="changeRole(user, $any($event.target).value)"
+                >
+                  @for (r of roles; track r[0]) {
+                    <option [value]="r[0]">{{ r[1] }}</option>
+                  }
+                </select>
+              }
+            </td>
+            <td>
+              @if (user.active) {
+                <span class="badge badge-success">aktiv</span>
+              } @else {
+                <span class="badge badge-warning">deaktiviert</span>
+              }
+            </td>
+            <td>{{ formatDateTime(user.created_at) }}</td>
+            <td>
+              @if (!isSelf(user)) {
+                @if (user.active) {
+                  <button type="button" class="btn btn-danger btn-small" [disabled]="busyId() === user.id" (click)="setActive(user, false)">
+                    Deaktivieren
+                  </button>
+                } @else {
+                  <button type="button" class="btn btn-secondary btn-small" [disabled]="busyId() === user.id" (click)="setActive(user, true)">
+                    Aktivieren
+                  </button>
+                }
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

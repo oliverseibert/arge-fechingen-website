@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SupabaseService } from '../core/supabase.service';
+import { NEWS_IMAGES_BUCKET, SupabaseService } from '../core/supabase.service';
 import { SsrData } from '../core/ssr-data';
 import { Tables, TablesInsert, TablesUpdate } from '../core/database.types';
 
@@ -82,14 +82,14 @@ export class NewsService {
     const extension = file.name.split('.').pop()?.toLowerCase() ?? 'jpg';
     const path = `${new Date().getFullYear()}/${crypto.randomUUID()}.${extension}`;
     const { error } = await this.supabase.required.storage
-      .from('news-images')
+      .from(NEWS_IMAGES_BUCKET)
       .upload(path, file, { cacheControl: '31536000', contentType: file.type, upsert: false });
     if (error) throw error;
     return path;
   }
 
   async removeImage(path: string): Promise<void> {
-    const { error } = await this.supabase.required.storage.from('news-images').remove([path]);
+    const { error } = await this.supabase.required.storage.from(NEWS_IMAGES_BUCKET).remove([path]);
     if (error) console.warn('Bild konnte nicht gelöscht werden', error);
   }
 }
