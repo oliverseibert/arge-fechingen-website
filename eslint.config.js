@@ -7,7 +7,13 @@ const angular = require('angular-eslint');
 module.exports = defineConfig([
   {
     // Deno-Code (Edge Functions) und Build-Ausgaben nicht mit Angular-Regeln prüfen
-    ignores: ['supabase/**', 'dist/**', '.vercel/**', 'src/environments/env.generated.ts'],
+    ignores: [
+      'supabase/**',
+      'dist/**',
+      '.vercel/**',
+      'src/environments/env.generated.ts',
+      'src/app/core/database.types.ts',
+    ],
   },
   {
     files: ['**/*.ts'],

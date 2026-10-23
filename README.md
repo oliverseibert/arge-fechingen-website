@@ -96,12 +96,13 @@ Im Supabase-Dashboard unter **Authentication**:
 
 ### Migrationen (`supabase/migrations/`)
 
-| Datei                         | Inhalt                                                                                       |
-| ----------------------------- | -------------------------------------------------------------------------------------------- |
-| `…01_profiles_roles.sql`      | Enum `app_role`, `profiles`, Trigger bei neuem User, `has_role()`, Schutz des letzten Admins |
-| `…02_news_events.sql`         | `news` (Status, Slug, Veröffentlichungsdatum), `events`, Trigger, RLS                        |
-| `…03_newsletter.sql`          | `newsletter_subscribers` (pending/confirmed/unsubscribed, Token), RLS                        |
-| `…04_storage_news_images.sql` | Bucket `news-images` (öffentlich lesbar, max. 5 MB, nur Bilder) und Policies                 |
+| Datei                             | Inhalt                                                                                       |
+| --------------------------------- | -------------------------------------------------------------------------------------------- |
+| `…01_profiles_roles.sql`          | Enum `app_role`, `profiles`, Trigger bei neuem User, `has_role()`, Schutz des letzten Admins |
+| `…02_news_events.sql`             | `news` (Status, Slug, Veröffentlichungsdatum), `events`, Trigger, RLS                        |
+| `…03_newsletter.sql`              | `newsletter_subscribers` (pending/confirmed/unsubscribed, Token), RLS                        |
+| `…04_storage_news_images.sql`     | Bucket `news-images` (öffentlich lesbar, max. 5 MB, nur Bilder) und Policies                 |
+| `…05_revoke_function_execute.sql` | Trigger-Funktionen nicht per API aufrufbar, `has_role()` nur für angemeldete Benutzer        |
 
 **Rechte (RLS):**
 
