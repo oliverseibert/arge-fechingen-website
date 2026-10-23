@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 /** Sichtbarer Platzhalter für Inhalte, die noch fehlen. */
 @Component({
   selector: 'app-todo',
-  template: `<strong>TODO:</strong> <ng-content />`,
+  template: `<strong class="label">TODO:</strong><ng-content />`,
   styles: `
     :host {
       display: block;
@@ -13,6 +13,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       border-radius: var(--radius);
       background: var(--color-todo-bg);
       color: #3d3100;
+    }
+    .label {
+      margin-right: 0.35em;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

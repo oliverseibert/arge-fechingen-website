@@ -14,12 +14,19 @@ import { SeoService } from '../../core/seo.service';
           <p class="alert alert-success" role="status">Sie wurden vom Newsletter abgemeldet.</p>
         }
         @case ('error') {
-          <p class="alert alert-error" role="alert">Der Abmeldelink ist ungültig. Bitte wenden Sie sich an uns.</p>
+          <p class="alert alert-error" role="alert">
+            Der Abmeldelink ist ungültig. Bitte wenden Sie sich an uns.
+          </p>
         }
         @default {
           @if (token()) {
             <p>Möchten Sie den Newsletter der ARGE Fechingen wirklich abbestellen?</p>
-            <button type="button" class="btn" [disabled]="state() === 'sending'" (click)="unsubscribe()">
+            <button
+              type="button"
+              class="btn"
+              [disabled]="state() === 'sending'"
+              (click)="unsubscribe()"
+            >
               {{ state() === 'sending' ? 'Wird abgemeldet …' : 'Jetzt abmelden' }}
             </button>
           } @else {

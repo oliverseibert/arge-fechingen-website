@@ -14,15 +14,21 @@ Deno.serve(
     const action = String(body.action ?? '');
     if (!UUID_PATTERN.test(userId)) throw new HttpError(400, 'Ungültige User-ID');
     if (!['activate', 'deactivate'].includes(action)) throw new HttpError(400, 'Ungültige Aktion');
-    if (userId === callerId) throw new HttpError(400, 'Das eigene Konto kann nicht geändert werden');
+    if (userId === callerId)
+      throw new HttpError(400, 'Das eigene Konto kann nicht geändert werden');
 
     const active = action === 'activate';
 
     // Zuerst Profil (Trigger schützt den letzten Admin), dann Login sperren/entsperren
-    const { error: profileError } = await admin.from('profiles').update({ active }).eq('id', userId);
+    const { error: profileError } = await admin
+      .from('profiles')
+      .update({ active })
+      .eq('id', userId);
     if (profileError) throw new HttpError(400, profileError.message);
 
-    const { error } = await admin.auth.admin.updateUserById(userId, { ban_duration: active ? 'none' : BAN_DURATION });
+    const { error } = await admin.auth.admin.updateUserById(userId, {
+      ban_duration: active ? 'none' : BAN_DURATION,
+    });
     if (error) throw new HttpError(400, error.message);
 
     return { ok: true };

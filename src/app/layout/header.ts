@@ -38,7 +38,12 @@ export const MAIN_NAV = [
           <ul>
             @for (item of nav; track item.path) {
               <li>
-                <a [routerLink]="item.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{ item.label }}</a>
+                <a
+                  [routerLink]="item.path"
+                  routerLinkActive="active"
+                  ariaCurrentWhenActive="page"
+                  >{{ item.label }}</a
+                >
               </li>
             }
           </ul>

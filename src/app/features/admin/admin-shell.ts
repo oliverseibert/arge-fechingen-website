@@ -10,21 +10,54 @@ import { SeoService } from '../../core/seo.service';
     <div class="container admin">
       <aside class="side">
         <p class="user">
-          <strong>{{ auth.profile()?.name || auth.profile()?.email }}</strong><br />
+          <strong>{{ auth.profile()?.name || auth.profile()?.email }}</strong
+          ><br />
           <span class="badge">{{ roleLabel() }}</span>
         </p>
         <nav aria-label="Admin-Navigation">
           <ul>
-            <li><a routerLink="/admin" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" ariaCurrentWhenActive="page">Übersicht</a></li>
-            <li><a routerLink="/admin/news" routerLinkActive="active" ariaCurrentWhenActive="page">News</a></li>
-            <li><a routerLink="/admin/termine" routerLinkActive="active" ariaCurrentWhenActive="page">Termine</a></li>
+            <li>
+              <a
+                routerLink="/admin"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                >Übersicht</a
+              >
+            </li>
+            <li>
+              <a routerLink="/admin/news" routerLinkActive="active" ariaCurrentWhenActive="page"
+                >News</a
+              >
+            </li>
+            <li>
+              <a routerLink="/admin/termine" routerLinkActive="active" ariaCurrentWhenActive="page"
+                >Termine</a
+              >
+            </li>
             @if (auth.isAdmin()) {
-              <li><a routerLink="/admin/newsletter" routerLinkActive="active" ariaCurrentWhenActive="page">Newsletter-Abos</a></li>
-              <li><a routerLink="/admin/benutzer" routerLinkActive="active" ariaCurrentWhenActive="page">Benutzer</a></li>
+              <li>
+                <a
+                  routerLink="/admin/newsletter"
+                  routerLinkActive="active"
+                  ariaCurrentWhenActive="page"
+                  >Newsletter-Abos</a
+                >
+              </li>
+              <li>
+                <a
+                  routerLink="/admin/benutzer"
+                  routerLinkActive="active"
+                  ariaCurrentWhenActive="page"
+                  >Benutzer</a
+                >
+              </li>
             }
           </ul>
         </nav>
-        <button type="button" class="btn btn-secondary btn-small" (click)="logout()">Abmelden</button>
+        <button type="button" class="btn btn-secondary btn-small" (click)="logout()">
+          Abmelden
+        </button>
       </aside>
       <section class="content">
         <router-outlet />

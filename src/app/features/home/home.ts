@@ -30,6 +30,10 @@ import { SeoService } from '../../core/seo.service';
 })
 export class Home {
   constructor() {
-    inject(SeoService).set({ path: '/', description: 'Die ARGE (Arbeitsgemeinschaft) Fechingen – Neuigkeiten, Termine und Informationen rund um Fechingen.' });
+    inject(SeoService).set({
+      path: '/',
+      description:
+        'Die ARGE (Arbeitsgemeinschaft) Fechingen – Neuigkeiten, Termine und Informationen rund um Fechingen.',
+    });
   }
 }

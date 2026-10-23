@@ -17,15 +17,21 @@
           }
           @if (club.contact_email) {
             <dt>E-Mail</dt>
-            <dd><a [href]="'mailto:' + club.contact_email">{{ club.contact_email }}</a></dd>
+            <dd>
+              <a [href]="'mailto:' + club.contact_email">{{ club.contact_email }}</a>
+            </dd>
           }
           @if (club.contact_phone) {
             <dt>Telefon</dt>
-            <dd><a [href]="'tel:' + club.contact_phone">{{ club.contact_phone }}</a></dd>
+            <dd>
+              <a [href]="'tel:' + club.contact_phone">{{ club.contact_phone }}</a>
+            </dd>
           }
           @if (club.website) {
             <dt>Website</dt>
-            <dd><a [href]="club.website" target="_blank" rel="noopener">{{ club.website }}</a></dd>
+            <dd>
+              <a [href]="club.website" target="_blank" rel="noopener">{{ club.website }}</a>
+            </dd>
           }
         </dl>
       </li>
@@ -35,7 +41,9 @@
   <h2>Regelmäßige Trainings und Proben</h2>
   <div class="table-wrap">
     <table class="table">
-      <caption class="visually-hidden">Regelmäßige Trainings und Proben der Vereine</caption>
+      <caption class="visually-hidden">
+        Regelmäßige Trainings und Proben der Vereine
+      </caption>
       <thead>
         <tr>
           <th scope="col">Tag</th>
@@ -49,7 +57,12 @@
       <tbody>
         @for (a of activities; track a.id) {
           <tr>
-            <td>{{ weekdays[a.weekday] }}@if (a.interval_note) {<br /><span class="muted">{{ a.interval_note }}</span>}</td>
+            <td>
+              {{ weekdays[a.weekday] }}
+              @if (a.interval_note) {
+                <br /><span class="muted">{{ a.interval_note }}</span>
+              }
+            </td>
             <td>{{ timeRange(a) }}</td>
             <td>{{ a.title }}</td>
             <td>{{ clubName(a) }}</td>

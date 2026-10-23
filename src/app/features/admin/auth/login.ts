@@ -13,24 +13,42 @@ import { SeoService } from '../../../core/seo.service';
       <div class="card auth">
         <h1>Anmelden</h1>
         @if (!supabase.configured) {
-          <p class="alert alert-error" role="alert">Supabase ist nicht konfiguriert (SUPABASE_URL / SUPABASE_ANON_KEY).</p>
+          <p class="alert alert-error" role="alert">
+            Supabase ist nicht konfiguriert (SUPABASE_URL / SUPABASE_ANON_KEY).
+          </p>
         }
         @if (fehler() === 'keine-rolle') {
-          <p class="alert alert-error" role="alert">Ihr Konto ist nicht (mehr) freigeschaltet. Bitte wenden Sie sich an einen Admin.</p>
+          <p class="alert alert-error" role="alert">
+            Ihr Konto ist nicht (mehr) freigeschaltet. Bitte wenden Sie sich an einen Admin.
+          </p>
         }
         <form [formGroup]="form" (ngSubmit)="submit()">
           <div class="form-field">
             <label for="login-email">E-Mail-Adresse</label>
-            <input id="login-email" type="email" formControlName="email" autocomplete="username" required />
+            <input
+              id="login-email"
+              type="email"
+              formControlName="email"
+              autocomplete="username"
+              required
+            />
           </div>
           <div class="form-field">
             <label for="login-password">Passwort</label>
-            <input id="login-password" type="password" formControlName="password" autocomplete="current-password" required />
+            <input
+              id="login-password"
+              type="password"
+              formControlName="password"
+              autocomplete="current-password"
+              required
+            />
           </div>
           @if (error()) {
             <p class="alert alert-error" role="alert">{{ error() }}</p>
           }
-          <button type="submit" class="btn" [disabled]="form.invalid || busy()">{{ busy() ? 'Anmelden …' : 'Anmelden' }}</button>
+          <button type="submit" class="btn" [disabled]="form.invalid || busy()">
+            {{ busy() ? 'Anmelden …' : 'Anmelden' }}
+          </button>
         </form>
         <p class="links"><a routerLink="/admin/passwort-vergessen">Passwort vergessen?</a></p>
       </div>

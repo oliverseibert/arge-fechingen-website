@@ -13,7 +13,9 @@ import { formatDateTime } from '../../../shared/format';
     </div>
 
     @if (message()) {
-      <p class="alert" [class.alert-error]="message()!.error" role="status">{{ message()!.text }}</p>
+      <p class="alert" [class.alert-error]="message()!.error" role="status">
+        {{ message()!.text }}
+      </p>
     }
 
     @if (news.isLoading()) {
@@ -37,7 +39,8 @@ import { formatDateTime } from '../../../shared/format';
             @for (item of news.value(); track item.id) {
               <tr>
                 <td>
-                  <a [routerLink]="['/admin/news', item.id]">{{ item.title }}</a><br />
+                  <a [routerLink]="['/admin/news', item.id]">{{ item.title }}</a
+                  ><br />
                   <span class="muted">/neues/{{ item.slug }}</span>
                 </td>
                 <td>
@@ -50,11 +53,19 @@ import { formatDateTime } from '../../../shared/format';
                 <td>{{ formatDateTime(item.published_at) }}</td>
                 <td>
                   <div class="actions">
-                    <a [routerLink]="['/admin/news', item.id]" class="btn btn-secondary btn-small">Bearbeiten</a>
-                    <button type="button" class="btn btn-secondary btn-small" (click)="togglePublish(item)">
+                    <a [routerLink]="['/admin/news', item.id]" class="btn btn-secondary btn-small"
+                      >Bearbeiten</a
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-small"
+                      (click)="togglePublish(item)"
+                    >
                       {{ item.status === 'published' ? 'Zurückziehen' : 'Veröffentlichen' }}
                     </button>
-                    <button type="button" class="btn btn-danger btn-small" (click)="remove(item)">Löschen</button>
+                    <button type="button" class="btn btn-danger btn-small" (click)="remove(item)">
+                      Löschen
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -90,7 +101,11 @@ export class NewsAdminList {
     try {
       // Beim Zurückziehen Datum behalten, beim (Wieder-)Veröffentlichen setzt die DB ggf. jetzt
       await this.newsService.update(item.id, { status: publish ? 'published' : 'draft' });
-      this.message.set({ text: publish ? `„${item.title}“ ist veröffentlicht.` : `„${item.title}“ wurde zurückgezogen.` });
+      this.message.set({
+        text: publish
+          ? `„${item.title}“ ist veröffentlicht.`
+          : `„${item.title}“ wurde zurückgezogen.`,
+      });
       this.news.reload();
     } catch {
       this.message.set({ text: 'Status konnte nicht geändert werden.', error: true });

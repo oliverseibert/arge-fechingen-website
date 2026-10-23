@@ -85,7 +85,11 @@ export class AuthService {
       return;
     }
     this.session.set((await client.auth.getSession()).data.session);
-    const { data, error } = await client.from('profiles').select('*').eq('id', userData.user.id).maybeSingle();
+    const { data, error } = await client
+      .from('profiles')
+      .select('*')
+      .eq('id', userData.user.id)
+      .maybeSingle();
     if (error) console.error('Profil konnte nicht geladen werden', error);
     this.profile.set(data ?? null);
   }

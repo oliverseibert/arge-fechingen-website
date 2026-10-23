@@ -15,6 +15,10 @@ export class Vorstand {
   protected readonly gruppenbild = GRUPPENBILD;
 
   constructor() {
-    inject(SeoService).set({ title: 'Der Vorstand', path: '/vorstand', description: 'Der Vorstand der ARGE Fechingen stellt sich vor.' });
+    inject(SeoService).set({
+      title: 'Der Vorstand',
+      path: '/vorstand',
+      description: 'Der Vorstand der ARGE Fechingen stellt sich vor.',
+    });
   }
 }

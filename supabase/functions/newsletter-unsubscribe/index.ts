@@ -18,7 +18,11 @@ Deno.serve(
 
     if (!data.length) {
       // Bereits abgemeldet ist auch ein Erfolg
-      const { data: existing } = await db.from('newsletter_subscribers').select('id').eq('token', token).maybeSingle();
+      const { data: existing } = await db
+        .from('newsletter_subscribers')
+        .select('id')
+        .eq('token', token)
+        .maybeSingle();
       if (!existing) throw new HttpError(404, 'Ungültiger Link');
     }
     return { ok: true };

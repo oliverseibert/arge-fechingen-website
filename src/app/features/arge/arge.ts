@@ -18,6 +18,10 @@ import { Todo } from '../../shared/todo';
 })
 export class Arge {
   constructor() {
-    inject(SeoService).set({ title: 'Die ARGE', path: '/die-arge', description: 'Geschichte und Chronik der ARGE Fechingen.' });
+    inject(SeoService).set({
+      title: 'Die ARGE',
+      path: '/die-arge',
+      description: 'Geschichte und Chronik der ARGE Fechingen.',
+    });
   }
 }

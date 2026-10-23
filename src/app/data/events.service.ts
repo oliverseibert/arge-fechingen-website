@@ -21,8 +21,16 @@ export interface EventMonthGroup {
 
 /** Gruppiert Termine chronologisch nach Monat (Zeitzone Europe/Berlin). */
 export function groupEventsByMonth(events: EventItem[]): EventMonthGroup[] {
-  const keyFormat = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE, year: 'numeric', month: '2-digit' });
-  const labelFormat = new Intl.DateTimeFormat('de-DE', { timeZone: TIME_ZONE, year: 'numeric', month: 'long' });
+  const keyFormat = new Intl.DateTimeFormat('en-CA', {
+    timeZone: TIME_ZONE,
+    year: 'numeric',
+    month: '2-digit',
+  });
+  const labelFormat = new Intl.DateTimeFormat('de-DE', {
+    timeZone: TIME_ZONE,
+    year: 'numeric',
+    month: 'long',
+  });
   const groups = new Map<string, EventMonthGroup>();
 
   for (const event of [...events].sort((a, b) => a.starts_at.localeCompare(b.starts_at))) {
@@ -60,25 +68,41 @@ export class EventsService {
   // --- Admin ---
 
   async listAll(): Promise<EventItem[]> {
-    const { data, error } = await this.supabase.required.from('events').select('*').order('starts_at', { ascending: true });
+    const { data, error } = await this.supabase.required
+      .from('events')
+      .select('*')
+      .order('starts_at', { ascending: true });
     if (error) throw error;
     return data;
   }
 
   async getById(id: string): Promise<EventItem | null> {
-    const { data, error } = await this.supabase.required.from('events').select('*').eq('id', id).maybeSingle();
+    const { data, error } = await this.supabase.required
+      .from('events')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
     if (error) throw error;
     return data;
   }
 
   async create(event: TablesInsert<'events'>): Promise<EventItem> {
-    const { data, error } = await this.supabase.required.from('events').insert(event).select().single();
+    const { data, error } = await this.supabase.required
+      .from('events')
+      .insert(event)
+      .select()
+      .single();
     if (error) throw error;
     return data;
   }
 
   async update(id: string, changes: TablesUpdate<'events'>): Promise<EventItem> {
-    const { data, error } = await this.supabase.required.from('events').update(changes).eq('id', id).select().single();
+    const { data, error } = await this.supabase.required
+      .from('events')
+      .update(changes)
+      .eq('id', id)
+      .select()
+      .single();
     if (error) throw error;
     return data;
   }

@@ -8,10 +8,30 @@ export interface Vorstandsmitglied {
 
 // TODO: echte Mitglieder, Funktionen, Texte und Fotos eintragen
 export const VORSTAND: Vorstandsmitglied[] = [
-  { name: 'TODO: Name', funktion: 'TODO: 1. Vorsitz', text: 'TODO: kurzer Vorstellungstext', foto: null },
-  { name: 'TODO: Name', funktion: 'TODO: 2. Vorsitz', text: 'TODO: kurzer Vorstellungstext', foto: null },
-  { name: 'TODO: Name', funktion: 'TODO: Kasse', text: 'TODO: kurzer Vorstellungstext', foto: null },
-  { name: 'TODO: Name', funktion: 'TODO: Schriftführung', text: 'TODO: kurzer Vorstellungstext', foto: null },
+  {
+    name: 'TODO: Name',
+    funktion: 'TODO: 1. Vorsitz',
+    text: 'TODO: kurzer Vorstellungstext',
+    foto: null,
+  },
+  {
+    name: 'TODO: Name',
+    funktion: 'TODO: 2. Vorsitz',
+    text: 'TODO: kurzer Vorstellungstext',
+    foto: null,
+  },
+  {
+    name: 'TODO: Name',
+    funktion: 'TODO: Kasse',
+    text: 'TODO: kurzer Vorstellungstext',
+    foto: null,
+  },
+  {
+    name: 'TODO: Name',
+    funktion: 'TODO: Schriftführung',
+    text: 'TODO: kurzer Vorstellungstext',
+    foto: null,
+  },
 ];
 
 export const GRUPPENBILD = {

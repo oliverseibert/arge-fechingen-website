@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, afterNextRender, inject, signal } from '@angular/core';
-import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
 import { SeoService } from '../../../core/seo.service';
@@ -32,12 +38,25 @@ function passwordsMatch(group: AbstractControl): ValidationErrors | null {
             <form [formGroup]="form" (ngSubmit)="submit()">
               <div class="form-field">
                 <label for="sp-password">Neues Passwort</label>
-                <input id="sp-password" type="password" formControlName="password" autocomplete="new-password" required aria-describedby="sp-hint" />
+                <input
+                  id="sp-password"
+                  type="password"
+                  formControlName="password"
+                  autocomplete="new-password"
+                  required
+                  aria-describedby="sp-hint"
+                />
                 <span id="sp-hint" class="hint">Mindestens {{ minLength }} Zeichen.</span>
               </div>
               <div class="form-field">
                 <label for="sp-repeat">Passwort wiederholen</label>
-                <input id="sp-repeat" type="password" formControlName="repeat" autocomplete="new-password" required />
+                <input
+                  id="sp-repeat"
+                  type="password"
+                  formControlName="repeat"
+                  autocomplete="new-password"
+                  required
+                />
                 @if (form.errors?.['mismatch'] && form.controls.repeat.touched) {
                   <span class="error">Die Passwörter stimmen nicht überein.</span>
                 }
@@ -45,7 +64,9 @@ function passwordsMatch(group: AbstractControl): ValidationErrors | null {
               @if (error()) {
                 <p class="alert alert-error" role="alert">{{ error() }}</p>
               }
-              <button type="submit" class="btn" [disabled]="form.invalid || state() === 'saving'">Passwort speichern</button>
+              <button type="submit" class="btn" [disabled]="form.invalid || state() === 'saving'">
+                Passwort speichern
+              </button>
             </form>
           }
         }
@@ -88,7 +109,9 @@ export class SetPassword {
       await this.auth.loadProfile();
       await this.router.navigateByUrl('/admin');
     } catch {
-      this.error.set('Das Passwort konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.');
+      this.error.set(
+        'Das Passwort konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.',
+      );
       this.state.set('ready');
     }
   }

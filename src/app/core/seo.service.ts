@@ -36,7 +36,10 @@ export class SeoService {
       this.meta.updateTag({ name: 'description', content: data.description });
       this.meta.updateTag({ property: 'og:description', content: data.description });
     }
-    this.meta.updateTag({ name: 'robots', content: data.noindex ? 'noindex, nofollow' : 'index, follow' });
+    this.meta.updateTag({
+      name: 'robots',
+      content: data.noindex ? 'noindex, nofollow' : 'index, follow',
+    });
     this.setCanonical(url);
   }
 

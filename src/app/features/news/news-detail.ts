@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, RESPONSE_INIT, effect, inject, input, resource } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  RESPONSE_INIT,
+  effect,
+  inject,
+  input,
+  resource,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NewsService } from '../../data/news.service';
 import { SupabaseService } from '../../core/supabase.service';
@@ -19,7 +27,9 @@ import { formatDate } from '../../shared/format';
       } @else {
         @if (news.value(); as item) {
           <h1>{{ item.title }}</h1>
-          <p class="muted"><time [attr.datetime]="item.published_at">{{ formatDate(item.published_at) }}</time></p>
+          <p class="muted">
+            <time [attr.datetime]="item.published_at">{{ formatDate(item.published_at) }}</time>
+          </p>
           @if (supabase.publicImageUrl(item.image_path); as src) {
             <img class="image" [src]="src" [alt]="item.image_alt ?? ''" width="1200" height="675" />
           }

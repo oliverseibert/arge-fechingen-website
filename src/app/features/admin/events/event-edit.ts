@@ -1,7 +1,25 @@
-import { ChangeDetectionStrategy, Component, afterNextRender, inject, input, signal } from '@angular/core';
-import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { EVENT_CATEGORIES, EventCategory, EventItem, EventsService } from '../../../data/events.service';
+import {
+  EVENT_CATEGORIES,
+  EventCategory,
+  EventItem,
+  EventsService,
+} from '../../../data/events.service';
 import { fromDateTimeLocal, toDateTimeLocal } from '../../../shared/format';
 
 function endAfterStart(group: AbstractControl): ValidationErrors | null {
@@ -71,7 +89,9 @@ function endAfterStart(group: AbstractControl): ValidationErrors | null {
         }
 
         <div class="actions">
-          <button type="submit" class="btn" [disabled]="saving()">{{ saving() ? 'Wird gespeichert …' : 'Speichern' }}</button>
+          <button type="submit" class="btn" [disabled]="saving()">
+            {{ saving() ? 'Wird gespeichert …' : 'Speichern' }}
+          </button>
           <a routerLink="/admin/termine" class="btn btn-secondary">Abbrechen</a>
         </div>
       </form>

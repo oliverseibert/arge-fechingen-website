@@ -10,7 +10,9 @@ const env = {
 };
 
 if (!env.supabaseUrl || !env.supabaseAnonKey) {
-  console.warn('[write-env] SUPABASE_URL / SUPABASE_ANON_KEY fehlen – Daten aus Supabase werden nicht geladen.');
+  console.warn(
+    '[write-env] SUPABASE_URL / SUPABASE_ANON_KEY fehlen – Daten aus Supabase werden nicht geladen.',
+  );
 }
 
 writeFileSync(

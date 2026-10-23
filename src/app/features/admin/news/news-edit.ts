@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, afterNextRender, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  afterNextRender,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
@@ -39,7 +48,9 @@ export class NewsEdit {
   protected readonly saving = signal(false);
   protected readonly error = signal('');
   protected readonly preview = signal(false);
-  private readonly content = toSignal(this.form.controls.content.valueChanges, { initialValue: '' });
+  private readonly content = toSignal(this.form.controls.content.valueChanges, {
+    initialValue: '',
+  });
   protected readonly previewContent = computed(() => (this.preview() ? this.content() : ''));
 
   // Bild: neue Datei, Entfernen-Flag, Vorschau-URL
@@ -117,7 +128,9 @@ export class NewsEdit {
         status: value.status,
         published_at: fromDateTimeLocal(value.published_at),
       };
-      const saved = existing ? await this.newsService.update(existing.id, data) : await this.newsService.create(data);
+      const saved = existing
+        ? await this.newsService.update(existing.id, data)
+        : await this.newsService.create(data);
 
       // Altes Bild erst nach erfolgreichem Speichern entfernen
       if (existing?.image_path && existing.image_path !== saved.image_path) {

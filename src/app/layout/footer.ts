@@ -9,14 +9,16 @@ import { environment } from '../../environments/environment';
     <footer class="footer">
       <div class="container footer-inner">
         <p class="name">
-          <img src="/assets/logo/wappen-fechingen.png" alt="" width="32" height="36" />
+          <img src="/assets/logo/wappen-fechingen-klein.png" alt="" width="32" height="36" />
           ARGE Fechingen
         </p>
         <nav aria-label="Rechtliches und Kontakt">
           <ul>
             <li><a routerLink="/impressum">Impressum</a></li>
             <li><a routerLink="/datenschutz">Datenschutz</a></li>
-            <li><a [href]="'mailto:' + email">{{ email }}</a></li>
+            <li>
+              <a [href]="'mailto:' + email">{{ email }}</a>
+            </li>
           </ul>
         </nav>
       </div>

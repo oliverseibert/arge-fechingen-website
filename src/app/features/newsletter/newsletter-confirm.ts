@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, afterNextRender, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../core/supabase.service';
 import { SeoService } from '../../core/seo.service';
@@ -14,7 +21,9 @@ import { SeoService } from '../../core/seo.service';
           <p aria-live="polite">Ihre Anmeldung wird bestätigt …</p>
         }
         @case ('success') {
-          <p class="alert alert-success" role="status">Vielen Dank! Ihre Anmeldung zum Newsletter ist bestätigt.</p>
+          <p class="alert alert-success" role="status">
+            Vielen Dank! Ihre Anmeldung zum Newsletter ist bestätigt.
+          </p>
         }
         @case ('error') {
           <p class="alert alert-error" role="alert">

@@ -25,6 +25,10 @@ export class Kontakt {
   protected readonly email = environment.contactEmail;
 
   constructor() {
-    inject(SeoService).set({ title: 'Kontakt', path: '/kontakt', description: 'So erreichen Sie die ARGE Fechingen.' });
+    inject(SeoService).set({
+      title: 'Kontakt',
+      path: '/kontakt',
+      description: 'So erreichen Sie die ARGE Fechingen.',
+    });
   }
 }

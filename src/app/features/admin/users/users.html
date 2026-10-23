@@ -24,7 +24,9 @@
         </select>
       </div>
     </div>
-    <button type="submit" class="btn" [disabled]="inviting()">{{ inviting() ? 'Wird eingeladen …' : 'Einladung senden' }}</button>
+    <button type="submit" class="btn" [disabled]="inviting()">
+      {{ inviting() ? 'Wird eingeladen …' : 'Einladung senden' }}
+    </button>
   </form>
 </section>
 
@@ -52,7 +54,8 @@
         @for (user of users.value(); track user.id) {
           <tr>
             <td>
-              <strong>{{ user.name || '–' }}</strong><br />
+              <strong>{{ user.name || '–' }}</strong
+              ><br />
               {{ user.email }}
               @if (isSelf(user)) {
                 <span class="badge">Sie</span>
@@ -62,7 +65,9 @@
               @if (isSelf(user)) {
                 {{ roleLabel(user.role) }}
               } @else {
-                <label class="visually-hidden" [for]="'role-' + user.id">Rolle von {{ user.email }}</label>
+                <label class="visually-hidden" [for]="'role-' + user.id"
+                  >Rolle von {{ user.email }}</label
+                >
                 <select
                   [id]="'role-' + user.id"
                   [value]="user.role"
@@ -86,11 +91,21 @@
             <td>
               @if (!isSelf(user)) {
                 @if (user.active) {
-                  <button type="button" class="btn btn-danger btn-small" [disabled]="busyId() === user.id" (click)="setActive(user, false)">
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-small"
+                    [disabled]="busyId() === user.id"
+                    (click)="setActive(user, false)"
+                  >
                     Deaktivieren
                   </button>
                 } @else {
-                  <button type="button" class="btn btn-secondary btn-small" [disabled]="busyId() === user.id" (click)="setActive(user, true)">
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-small"
+                    [disabled]="busyId() === user.id"
+                    (click)="setActive(user, true)"
+                  >
                     Aktivieren
                   </button>
                 }

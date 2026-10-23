@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, resource, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  resource,
+  signal,
+} from '@angular/core';
 import { SupabaseService } from '../../../core/supabase.service';
 import { Enums, Tables } from '../../../core/database.types';
 import { formatDateTime } from '../../../shared/format';
@@ -25,7 +32,9 @@ const STATUS_LABELS: Record<Status, string> = {
           <option value="pending">Unbestätigt</option>
           <option value="unsubscribed">Abgemeldet</option>
         </select>
-        <button type="button" class="btn" [disabled]="!filtered().length" (click)="exportCsv()">CSV exportieren</button>
+        <button type="button" class="btn" [disabled]="!filtered().length" (click)="exportCsv()">
+          CSV exportieren
+        </button>
       </div>
     </div>
 
@@ -50,7 +59,11 @@ const STATUS_LABELS: Record<Status, string> = {
               <tr>
                 <td>{{ s.email }}</td>
                 <td>
-                  <span class="badge" [class.badge-success]="s.status === 'confirmed'" [class.badge-warning]="s.status === 'pending'">
+                  <span
+                    class="badge"
+                    [class.badge-success]="s.status === 'confirmed'"
+                    [class.badge-warning]="s.status === 'pending'"
+                  >
                     {{ statusLabel(s.status) }}
                   </span>
                 </td>
@@ -58,7 +71,9 @@ const STATUS_LABELS: Record<Status, string> = {
                 <td>{{ formatDateTime(s.confirmed_at) }}</td>
               </tr>
             } @empty {
-              <tr><td colspan="4" class="muted">Keine Einträge.</td></tr>
+              <tr>
+                <td colspan="4" class="muted">Keine Einträge.</td>
+              </tr>
             }
           </tbody>
         </table>
@@ -116,7 +131,16 @@ export class Subscribers {
     const escape = (v: string | null) => `"${(v ?? '').replace(/"/g, '""')}"`;
     const header = ['E-Mail', 'Status', 'Eingetragen', 'Einwilligung', 'Bestätigt', 'Abgemeldet'];
     const rows = this.filtered().map((s) =>
-      [s.email, STATUS_LABELS[s.status], s.created_at, s.consent_at, s.confirmed_at, s.unsubscribed_at].map(escape).join(';'),
+      [
+        s.email,
+        STATUS_LABELS[s.status],
+        s.created_at,
+        s.consent_at,
+        s.confirmed_at,
+        s.unsubscribed_at,
+      ]
+        .map(escape)
+        .join(';'),
     );
     // BOM + Semikolon: öffnet korrekt in deutschem Excel
     const csv = '﻿' + [header.map(escape).join(';'), ...rows].join('\r\n');

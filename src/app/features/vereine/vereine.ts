@@ -19,7 +19,11 @@ export class Vereine {
   private readonly clubNames = new Map(CLUBS.map((c) => [c.id, c.name]));
 
   constructor() {
-    inject(SeoService).set({ title: 'Vereine', path: '/vereine', description: 'Die Fechinger Vereine mit Kontaktdaten, Trainings und Proben.' });
+    inject(SeoService).set({
+      title: 'Vereine',
+      path: '/vereine',
+      description: 'Die Fechinger Vereine mit Kontaktdaten, Trainings und Proben.',
+    });
   }
 
   protected clubName(activity: ClubActivity): string {
@@ -27,6 +31,8 @@ export class Vereine {
   }
 
   protected timeRange(activity: ClubActivity): string {
-    return activity.end_time ? `${activity.start_time}–${activity.end_time} Uhr` : `ab ${activity.start_time} Uhr`;
+    return activity.end_time
+      ? `${activity.start_time}–${activity.end_time} Uhr`
+      : `ab ${activity.start_time} Uhr`;
   }
 }

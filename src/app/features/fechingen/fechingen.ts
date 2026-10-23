@@ -24,6 +24,10 @@ import { Todo } from '../../shared/todo';
 })
 export class Fechingen {
   constructor() {
-    inject(SeoService).set({ title: 'Fechingen', path: '/fechingen', description: 'Über das Dorf Fechingen und die Geschichte der Gänsegretel.' });
+    inject(SeoService).set({
+      title: 'Fechingen',
+      path: '/fechingen',
+      description: 'Über das Dorf Fechingen und die Geschichte der Gänsegretel.',
+    });
   }
 }

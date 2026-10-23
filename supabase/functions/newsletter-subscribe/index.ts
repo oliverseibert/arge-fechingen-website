@@ -11,8 +11,11 @@ Deno.serve(
     // Honeypot gefüllt → Bot; still "Erfolg" melden
     if (String(body.website ?? '').trim()) return { ok: true };
 
-    const email = String(body.email ?? '').trim().toLowerCase();
-    if (!EMAIL_PATTERN.test(email) || email.length > 254) throw new HttpError(400, 'Ungültige E-Mail-Adresse');
+    const email = String(body.email ?? '')
+      .trim()
+      .toLowerCase();
+    if (!EMAIL_PATTERN.test(email) || email.length > 254)
+      throw new HttpError(400, 'Ungültige E-Mail-Adresse');
     if (body.consent !== true) throw new HttpError(400, 'Einwilligung fehlt');
 
     const db = adminClient();
@@ -36,7 +39,14 @@ Deno.serve(
     const token = crypto.randomUUID();
     const now = new Date().toISOString();
     const { error: upsertError } = await db.from('newsletter_subscribers').upsert(
-      { email, status: 'pending', token, consent_at: now, confirmed_at: null, unsubscribed_at: null },
+      {
+        email,
+        status: 'pending',
+        token,
+        consent_at: now,
+        confirmed_at: null,
+        unsubscribed_at: null,
+      },
       { onConflict: 'email' },
     );
     if (upsertError) throw upsertError;

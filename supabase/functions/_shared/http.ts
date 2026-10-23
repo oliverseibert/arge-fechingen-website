@@ -4,7 +4,11 @@ const allowedOrigins = (Deno.env.get('ALLOWED_ORIGINS') ?? '*').split(',').map((
 
 function corsHeaders(req: Request): Record<string, string> {
   const origin = req.headers.get('Origin') ?? '';
-  const allow = allowedOrigins.includes('*') ? '*' : allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+  const allow = allowedOrigins.includes('*')
+    ? '*'
+    : allowedOrigins.includes(origin)
+      ? origin
+      : allowedOrigins[0];
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -54,4 +58,5 @@ export function requireEnv(name: string): string {
   return value;
 }
 
-export const siteUrl = () => (Deno.env.get('SITE_URL') ?? 'https://arge-fechingen.de').replace(/\/$/, '');
+export const siteUrl = () =>
+  (Deno.env.get('SITE_URL') ?? 'https://arge-fechingen.de').replace(/\/$/, '');

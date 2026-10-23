@@ -37,7 +37,12 @@ export class SupabaseService {
     if (error) {
       // Fehlermeldung der Edge Function bevorzugen
       const context = (error as { context?: Response }).context;
-      const message = context ? await context.json().then((j: { error?: string }) => j.error).catch(() => null) : null;
+      const message = context
+        ? await context
+            .json()
+            .then((j: { error?: string }) => j.error)
+            .catch(() => null)
+        : null;
       throw new Error(message ?? error.message);
     }
     return data as T;

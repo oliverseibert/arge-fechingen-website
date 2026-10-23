@@ -9,7 +9,9 @@ Deno.serve(
     const admin = adminClient();
     await requireAdmin(req, admin);
 
-    const email = String(body.email ?? '').trim().toLowerCase();
+    const email = String(body.email ?? '')
+      .trim()
+      .toLowerCase();
     const name = String(body.name ?? '').trim() || null;
     const role = String(body.role ?? 'content_creator');
     if (!EMAIL_PATTERN.test(email)) throw new HttpError(400, 'Ungültige E-Mail-Adresse');
@@ -20,8 +22,12 @@ Deno.serve(
       redirectTo: `${siteUrl()}/admin/passwort-setzen`,
     });
     if (error) {
-      const exists = error.status === 422 || /already been registered|already exists/i.test(error.message);
-      throw new HttpError(exists ? 409 : 400, exists ? 'Es gibt bereits einen Benutzer mit dieser E-Mail-Adresse' : error.message);
+      const exists =
+        error.status === 422 || /already been registered|already exists/i.test(error.message);
+      throw new HttpError(
+        exists ? 409 : 400,
+        exists ? 'Es gibt bereits einen Benutzer mit dieser E-Mail-Adresse' : error.message,
+      );
     }
 
     // Profil wird per Trigger angelegt; hier Rolle setzen und freischalten

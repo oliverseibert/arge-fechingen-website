@@ -9,7 +9,8 @@ import { SupabaseService } from '../../core/supabase.service';
   template: `
     @if (state() === 'success') {
       <p class="alert alert-success" role="status">
-        Fast geschafft! Wir haben Ihnen eine E-Mail geschickt. Bitte bestätigen Sie Ihre Anmeldung über den Link darin.
+        Fast geschafft! Wir haben Ihnen eine E-Mail geschickt. Bitte bestätigen Sie Ihre Anmeldung
+        über den Link darin.
       </p>
     } @else {
       <p>Erhalten Sie Neuigkeiten der ARGE Fechingen per E-Mail.</p>
@@ -26,14 +27,22 @@ import { SupabaseService } from '../../core/supabase.service';
             [attr.aria-describedby]="showError('email') ? 'nl-email-error' : null"
           />
           @if (showError('email')) {
-            <span id="nl-email-error" class="error">Bitte geben Sie eine gültige E-Mail-Adresse ein.</span>
+            <span id="nl-email-error" class="error"
+              >Bitte geben Sie eine gültige E-Mail-Adresse ein.</span
+            >
           }
         </div>
 
         <!-- Honeypot gegen Spam-Bots -->
         <div class="hp" aria-hidden="true">
           <label for="nl-website">Website</label>
-          <input id="nl-website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+          <input
+            id="nl-website"
+            type="text"
+            formControlName="website"
+            tabindex="-1"
+            autocomplete="off"
+          />
         </div>
 
         <div class="form-field">
@@ -47,8 +56,9 @@ import { SupabaseService } from '../../core/supabase.service';
               [attr.aria-describedby]="showError('consent') ? 'nl-consent-error' : null"
             />
             <span class="consent-text">
-              Ich möchte den Newsletter erhalten und willige ein, dass meine E-Mail-Adresse dafür gespeichert wird. Hinweise
-              in der <a routerLink="/datenschutz">Datenschutzerklärung</a>. Abmeldung jederzeit möglich.
+              Ich möchte den Newsletter erhalten und willige ein, dass meine E-Mail-Adresse dafür
+              gespeichert wird. Hinweise in der
+              <a routerLink="/datenschutz">Datenschutzerklärung</a>. Abmeldung jederzeit möglich.
             </span>
           </label>
           @if (showError('consent')) {
@@ -107,7 +117,9 @@ export class NewsletterForm {
       await this.supabase.invokeFunction('newsletter-subscribe', { email, consent, website });
       this.state.set('success');
     } catch {
-      this.errorMessage.set('Die Anmeldung hat leider nicht geklappt. Bitte versuchen Sie es später erneut.');
+      this.errorMessage.set(
+        'Die Anmeldung hat leider nicht geklappt. Bitte versuchen Sie es später erneut.',
+      );
       this.state.set('error');
     }
   }

@@ -21,6 +21,10 @@ export class NewsList {
   protected readonly news = resource({ loader: () => this.newsService.listPublished() });
 
   constructor() {
-    inject(SeoService).set({ title: 'Neues', path: '/neues', description: 'Aktuelle Neuigkeiten der ARGE Fechingen.' });
+    inject(SeoService).set({
+      title: 'Neues',
+      path: '/neues',
+      description: 'Aktuelle Neuigkeiten der ARGE Fechingen.',
+    });
   }
 }

@@ -4,7 +4,10 @@ import { SsrData } from '../core/ssr-data';
 import { Tables, TablesInsert, TablesUpdate } from '../core/database.types';
 
 export type News = Tables<'news'>;
-export type NewsSummary = Pick<News, 'id' | 'title' | 'slug' | 'teaser' | 'image_path' | 'image_alt' | 'published_at'>;
+export type NewsSummary = Pick<
+  News,
+  'id' | 'title' | 'slug' | 'teaser' | 'image_path' | 'image_alt' | 'published_at'
+>;
 
 const SUMMARY_COLUMNS = 'id, title, slug, teaser, image_path, image_alt, published_at';
 
@@ -55,19 +58,32 @@ export class NewsService {
   }
 
   async getById(id: string): Promise<News | null> {
-    const { data, error } = await this.supabase.required.from('news').select('*').eq('id', id).maybeSingle();
+    const { data, error } = await this.supabase.required
+      .from('news')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
     if (error) throw error;
     return data;
   }
 
   async create(news: TablesInsert<'news'>): Promise<News> {
-    const { data, error } = await this.supabase.required.from('news').insert(news).select().single();
+    const { data, error } = await this.supabase.required
+      .from('news')
+      .insert(news)
+      .select()
+      .single();
     if (error) throw error;
     return data;
   }
 
   async update(id: string, changes: TablesUpdate<'news'>): Promise<News> {
-    const { data, error } = await this.supabase.required.from('news').update(changes).eq('id', id).select().single();
+    const { data, error } = await this.supabase.required
+      .from('news')
+      .update(changes)
+      .eq('id', id)
+      .select()
+      .single();
     if (error) throw error;
     return data;
   }

@@ -17,7 +17,8 @@ Deno.serve(
       .eq('token', token)
       .maybeSingle();
     if (error) throw error;
-    if (!subscriber || subscriber.status === 'unsubscribed') throw new HttpError(404, 'Ungültiger Link');
+    if (!subscriber || subscriber.status === 'unsubscribed')
+      throw new HttpError(404, 'Ungültiger Link');
     if (subscriber.status === 'confirmed') return { ok: true };
 
     const consentAt = subscriber.consent_at ? new Date(subscriber.consent_at).getTime() : 0;

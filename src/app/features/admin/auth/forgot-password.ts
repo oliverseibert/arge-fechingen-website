@@ -13,19 +13,31 @@ import { SeoService } from '../../../core/seo.service';
         <h1>Passwort vergessen</h1>
         @if (sent()) {
           <p class="alert alert-success" role="status">
-            Falls ein Konto zu dieser Adresse existiert, haben wir eine E-Mail mit einem Link zum Zurücksetzen geschickt.
+            Falls ein Konto zu dieser Adresse existiert, haben wir eine E-Mail mit einem Link zum
+            Zurücksetzen geschickt.
           </p>
         } @else {
-          <p>Geben Sie Ihre E-Mail-Adresse ein. Sie erhalten einen Link, um ein neues Passwort zu setzen.</p>
+          <p>
+            Geben Sie Ihre E-Mail-Adresse ein. Sie erhalten einen Link, um ein neues Passwort zu
+            setzen.
+          </p>
           <form [formGroup]="form" (ngSubmit)="submit()">
             <div class="form-field">
               <label for="fp-email">E-Mail-Adresse</label>
-              <input id="fp-email" type="email" formControlName="email" autocomplete="email" required />
+              <input
+                id="fp-email"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                required
+              />
             </div>
             @if (error()) {
               <p class="alert alert-error" role="alert">{{ error() }}</p>
             }
-            <button type="submit" class="btn" [disabled]="form.invalid || busy()">Link anfordern</button>
+            <button type="submit" class="btn" [disabled]="form.invalid || busy()">
+              Link anfordern
+            </button>
           </form>
         }
         <p class="links"><a routerLink="/admin/login">Zurück zur Anmeldung</a></p>
@@ -56,7 +68,9 @@ export class ForgotPassword {
       await this.auth.sendPasswordReset(this.form.getRawValue().email);
       this.sent.set(true);
     } catch {
-      this.error.set('Der Link konnte nicht angefordert werden. Bitte versuchen Sie es später erneut.');
+      this.error.set(
+        'Der Link konnte nicht angefordert werden. Bitte versuchen Sie es später erneut.',
+      );
     } finally {
       this.busy.set(false);
     }

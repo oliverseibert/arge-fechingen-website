@@ -15,8 +15,18 @@
 
     <div class="form-field">
       <label for="news-slug">Slug (URL)</label>
-      <input id="news-slug" type="text" formControlName="slug" (input)="onSlugInput()" required aria-describedby="news-slug-hint" />
-      <span id="news-slug-hint" class="hint">Adresse: /neues/{{ form.controls.slug.value || '…' }} – nur Kleinbuchstaben, Ziffern und Bindestriche.</span>
+      <input
+        id="news-slug"
+        type="text"
+        formControlName="slug"
+        (input)="onSlugInput()"
+        required
+        aria-describedby="news-slug-hint"
+      />
+      <span id="news-slug-hint" class="hint"
+        >Adresse: /neues/{{ form.controls.slug.value || '…' }} – nur Kleinbuchstaben, Ziffern und
+        Bindestriche.</span
+      >
       @if (form.controls.slug.touched && form.controls.slug.invalid) {
         <span class="error">Ungültiger Slug.</span>
       }
@@ -24,22 +34,41 @@
 
     <div class="form-field">
       <label for="news-teaser">Teaser</label>
-      <textarea id="news-teaser" formControlName="teaser" rows="3" aria-describedby="news-teaser-hint"></textarea>
-      <span id="news-teaser-hint" class="hint">Kurzer Text für die Übersicht und Suchmaschinen.</span>
+      <textarea
+        id="news-teaser"
+        formControlName="teaser"
+        rows="3"
+        aria-describedby="news-teaser-hint"
+      ></textarea>
+      <span id="news-teaser-hint" class="hint"
+        >Kurzer Text für die Übersicht und Suchmaschinen.</span
+      >
     </div>
 
     <div class="form-field">
       <div class="label-row">
         <label for="news-content">Inhalt (Markdown)</label>
-        <button type="button" class="btn btn-secondary btn-small" [attr.aria-pressed]="preview()" (click)="preview.set(!preview())">
+        <button
+          type="button"
+          class="btn btn-secondary btn-small"
+          [attr.aria-pressed]="preview()"
+          (click)="preview.set(!preview())"
+        >
           {{ preview() ? 'Bearbeiten' : 'Vorschau' }}
         </button>
       </div>
       @if (preview()) {
         <div class="preview card" [innerHTML]="previewContent() | markdown"></div>
       } @else {
-        <textarea id="news-content" formControlName="content" rows="16" aria-describedby="news-content-hint"></textarea>
-        <span id="news-content-hint" class="hint">**fett**, *kursiv*, ## Überschrift, - Liste, [Link](https://…)</span>
+        <textarea
+          id="news-content"
+          formControlName="content"
+          rows="16"
+          aria-describedby="news-content-hint"
+        ></textarea>
+        <span id="news-content-hint" class="hint"
+          >**fett**, *kursiv*, ## Überschrift, - Liste, [Link](https://…)</span
+        >
       }
     </div>
 
@@ -49,10 +78,18 @@
         <img [src]="src" alt="Vorschau des Beitragsbilds" />
       }
       <label for="news-image">Bilddatei auswählen</label>
-      <input #fileInput id="news-image" type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" (change)="onFileChange($event)" />
+      <input
+        #fileInput
+        id="news-image"
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/avif,image/gif"
+        (change)="onFileChange($event)"
+      />
       <span class="hint">JPG, PNG, WebP, AVIF oder GIF, maximal 5 MB.</span>
       @if (imagePreview() || currentImageUrl()) {
-        <button type="button" class="btn btn-secondary btn-small" (click)="clearImage(fileInput)">Bild entfernen</button>
+        <button type="button" class="btn btn-secondary btn-small" (click)="clearImage(fileInput)">
+          Bild entfernen
+        </button>
         <label for="news-image-alt">Bildbeschreibung (Alternativtext)</label>
         <input id="news-image-alt" type="text" formControlName="image_alt" />
       }
@@ -68,8 +105,15 @@
       </div>
       <div class="form-field">
         <label for="news-published">Veröffentlichungsdatum</label>
-        <input id="news-published" type="datetime-local" formControlName="published_at" aria-describedby="news-published-hint" />
-        <span id="news-published-hint" class="hint">Leer = beim Veröffentlichen jetzt. Datum in der Zukunft = geplant.</span>
+        <input
+          id="news-published"
+          type="datetime-local"
+          formControlName="published_at"
+          aria-describedby="news-published-hint"
+        />
+        <span id="news-published-hint" class="hint"
+          >Leer = beim Veröffentlichen jetzt. Datum in der Zukunft = geplant.</span
+        >
       </div>
     </div>
 
@@ -78,7 +122,9 @@
     }
 
     <div class="actions">
-      <button type="submit" class="btn" [disabled]="saving()">{{ saving() ? 'Wird gespeichert …' : 'Speichern' }}</button>
+      <button type="submit" class="btn" [disabled]="saving()">
+        {{ saving() ? 'Wird gespeichert …' : 'Speichern' }}
+      </button>
       <a routerLink="/admin/news" class="btn btn-secondary">Abbrechen</a>
     </div>
   </form>

@@ -13,7 +13,9 @@ import { formatDateTime } from '../../../shared/format';
     </div>
 
     @if (message()) {
-      <p class="alert" [class.alert-error]="message()!.error" role="status">{{ message()!.text }}</p>
+      <p class="alert" [class.alert-error]="message()!.error" role="status">
+        {{ message()!.text }}
+      </p>
     }
 
     @if (events.isLoading()) {
@@ -38,13 +40,21 @@ import { formatDateTime } from '../../../shared/format';
             @for (event of events.value(); track event.id) {
               <tr>
                 <td>{{ formatDateTime(event.starts_at) }}</td>
-                <td><a [routerLink]="['/admin/termine', event.id]">{{ event.title }}</a></td>
+                <td>
+                  <a [routerLink]="['/admin/termine', event.id]">{{ event.title }}</a>
+                </td>
                 <td>{{ event.location }}</td>
                 <td>{{ categoryLabel(event) }}</td>
                 <td>
                   <div class="actions">
-                    <a [routerLink]="['/admin/termine', event.id]" class="btn btn-secondary btn-small">Bearbeiten</a>
-                    <button type="button" class="btn btn-danger btn-small" (click)="remove(event)">Löschen</button>
+                    <a
+                      [routerLink]="['/admin/termine', event.id]"
+                      class="btn btn-secondary btn-small"
+                      >Bearbeiten</a
+                    >
+                    <button type="button" class="btn btn-danger btn-small" (click)="remove(event)">
+                      Löschen
+                    </button>
                   </div>
                 </td>
               </tr>

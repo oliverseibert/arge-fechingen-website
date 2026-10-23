@@ -1,14 +1,34 @@
 import { TIME_ZONE } from '../data/events.service';
 
-const dateFormat = new Intl.DateTimeFormat('de-DE', { timeZone: TIME_ZONE, day: 'numeric', month: 'long', year: 'numeric' });
-const weekdayFormat = new Intl.DateTimeFormat('de-DE', { timeZone: TIME_ZONE, weekday: 'long', day: 'numeric', month: 'long' });
-const timeFormat = new Intl.DateTimeFormat('de-DE', { timeZone: TIME_ZONE, hour: '2-digit', minute: '2-digit' });
-const dateTimeFormat = new Intl.DateTimeFormat('de-DE', { timeZone: TIME_ZONE, dateStyle: 'medium', timeStyle: 'short' });
+const dateFormat = new Intl.DateTimeFormat('de-DE', {
+  timeZone: TIME_ZONE,
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+const weekdayFormat = new Intl.DateTimeFormat('de-DE', {
+  timeZone: TIME_ZONE,
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+});
+const timeFormat = new Intl.DateTimeFormat('de-DE', {
+  timeZone: TIME_ZONE,
+  hour: '2-digit',
+  minute: '2-digit',
+});
+const dateTimeFormat = new Intl.DateTimeFormat('de-DE', {
+  timeZone: TIME_ZONE,
+  dateStyle: 'medium',
+  timeStyle: 'short',
+});
 
-export const formatDate = (iso: string | null | undefined): string => (iso ? dateFormat.format(new Date(iso)) : '');
+export const formatDate = (iso: string | null | undefined): string =>
+  iso ? dateFormat.format(new Date(iso)) : '';
 export const formatWeekday = (iso: string): string => weekdayFormat.format(new Date(iso));
 export const formatTime = (iso: string): string => timeFormat.format(new Date(iso));
-export const formatDateTime = (iso: string | null | undefined): string => (iso ? dateTimeFormat.format(new Date(iso)) : '–');
+export const formatDateTime = (iso: string | null | undefined): string =>
+  iso ? dateTimeFormat.format(new Date(iso)) : '–';
 
 /** ISO-String → Wert für <input type="datetime-local"> (lokale Zeit des Browsers). */
 export function toDateTimeLocal(iso: string | null | undefined): string {

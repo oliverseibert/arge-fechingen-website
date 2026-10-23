@@ -36,7 +36,10 @@ export class Users {
 
   protected readonly users = resource({
     loader: async (): Promise<Profile[]> => {
-      const { data, error } = await this.supabase.required.from('profiles').select('*').order('created_at');
+      const { data, error } = await this.supabase.required
+        .from('profiles')
+        .select('*')
+        .order('created_at');
       if (error) throw error;
       return data;
     },
@@ -80,16 +83,26 @@ export class Users {
   protected async changeRole(user: Profile, role: AppRole): Promise<void> {
     if (role === user.role) return;
     await this.run(user, async () => {
-      const { error } = await this.supabase.required.from('profiles').update({ role }).eq('id', user.id);
+      const { error } = await this.supabase.required
+        .from('profiles')
+        .update({ role })
+        .eq('id', user.id);
       if (error) throw error;
       return `Rolle von ${user.email} ist jetzt „${ROLE_LABELS[role]}“.`;
     });
   }
 
   protected async setActive(user: Profile, active: boolean): Promise<void> {
-    if (!active && !confirm(`${user.email} wirklich deaktivieren? Der Zugang wird sofort gesperrt.`)) return;
+    if (
+      !active &&
+      !confirm(`${user.email} wirklich deaktivieren? Der Zugang wird sofort gesperrt.`)
+    )
+      return;
     await this.run(user, async () => {
-      await this.supabase.invokeFunction('manage-user', { userId: user.id, action: active ? 'activate' : 'deactivate' });
+      await this.supabase.invokeFunction('manage-user', {
+        userId: user.id,
+        action: active ? 'activate' : 'deactivate',
+      });
       return active ? `${user.email} ist wieder aktiv.` : `${user.email} wurde deaktiviert.`;
     });
   }

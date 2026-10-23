@@ -6,7 +6,9 @@
   @if (events.isLoading()) {
     <p aria-live="polite">Termine werden geladen …</p>
   } @else if (events.error()) {
-    <p class="alert alert-error" role="alert">Die Termine konnten nicht geladen werden. Bitte versuchen Sie es später erneut.</p>
+    <p class="alert alert-error" role="alert">
+      Die Termine konnten nicht geladen werden. Bitte versuchen Sie es später erneut.
+    </p>
   } @else if (months().length === 0) {
     <p class="muted">Die Termine werden in Kürze veröffentlicht.</p>
   } @else {
@@ -17,15 +19,21 @@
           @for (event of month.events; track event.id) {
             <li class="card event">
               <p class="when">
-                <time [attr.datetime]="event.starts_at">{{ formatWeekday(event.starts_at) }}, {{ formatTime(event.starts_at) }} Uhr</time>
+                <time [attr.datetime]="event.starts_at"
+                  >{{ formatWeekday(event.starts_at) }}, {{ formatTime(event.starts_at) }} Uhr</time
+                >
                 @if (event.ends_at) {
                   –
-                  <time [attr.datetime]="event.ends_at">{{ endLabel(event.starts_at, event.ends_at) }}</time>
+                  <time [attr.datetime]="event.ends_at">{{
+                    endLabel(event.starts_at, event.ends_at)
+                  }}</time>
                 }
               </p>
               <h4>{{ event.title }}</h4>
               @if (event.location) {
-                <p class="where"><span class="visually-hidden">Ort: </span>📍 {{ event.location }}</p>
+                <p class="where">
+                  <span class="visually-hidden">Ort: </span>📍 {{ event.location }}
+                </p>
               }
               @if (event.description) {
                 <p class="description">{{ event.description }}</p>

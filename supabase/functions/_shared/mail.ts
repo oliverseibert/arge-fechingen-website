@@ -18,9 +18,13 @@ export async function sendMail(mail: Mail): Promise<void> {
     },
     body: JSON.stringify({ from: requireEnv('NEWSLETTER_FROM'), ...mail }),
   });
-  if (!response.ok) throw new Error(`E-Mail-Versand fehlgeschlagen: ${response.status} ${await response.text()}`);
+  if (!response.ok)
+    throw new Error(`E-Mail-Versand fehlgeschlagen: ${response.status} ${await response.text()}`);
 }
 
 export function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  return value.replace(
+    /[&<>"']/g,
+    (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
+  );
 }

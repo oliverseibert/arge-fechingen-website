@@ -16,7 +16,9 @@ export class Jubilaeum {
   protected readonly formatWeekday = formatWeekday;
   protected readonly formatTime = formatTime;
 
-  protected readonly events = resource({ loader: () => this.eventsService.listByCategory('jubilaeum_2027') });
+  protected readonly events = resource({
+    loader: () => this.eventsService.listByCategory('jubilaeum_2027'),
+  });
   protected readonly months = computed(() => groupEventsByMonth(this.events.value() ?? []));
 
   constructor() {
