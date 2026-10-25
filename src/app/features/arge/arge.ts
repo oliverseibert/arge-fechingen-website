@@ -61,7 +61,7 @@ export class Arge {
     {
       icon: 'map-pin',
       title: 'Gänsegretelbrunnen',
-      text: '1985 fertiggestellt, am Fuße des Kirchbergs – zur Erinnerung an die Gänsegretel.',
+      text: '1985 fertiggestellt, am Fuße des Kirchbergs – zur Erinnerung an Katharina Margaretha Kest, die „Gänsegretel“.',
     },
     {
       icon: 'map-pin',

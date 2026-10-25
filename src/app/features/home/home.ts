@@ -35,7 +35,7 @@ export class Home {
     {
       path: '/fechingen',
       title: 'Fechingen',
-      text: 'Geschichte des Dorfes und die Gänsegretel.',
+      text: 'Die Geschichte des Dorfes und seiner berühmtesten Tochter, der Gänsegretel.',
       icon: 'map-pin',
     },
     {

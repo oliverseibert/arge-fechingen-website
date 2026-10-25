@@ -24,7 +24,7 @@ export class Fechingen {
       title: 'Fechingen',
       path: '/fechingen',
       description:
-        'Fechingen – seit 777 urkundlich erwähnt, 2027 feiert das Dorf 1250 Jahre. Geschichte, Kirche auf dem Kirchberg, Sehenswertes und die Geschichte der Gänsegretel.',
+        'Fechingen – seit 777 urkundlich erwähnt, 2027 feiert das Dorf 1250 Jahre. Geschichte, Kirche auf dem Kirchberg, Sehenswertes und die Lebensgeschichte der „Gänsegretel“ Katharina Margaretha Kest.',
     });
   }
 }
