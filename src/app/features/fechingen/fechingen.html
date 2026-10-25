@@ -1,0 +1,146 @@
+<app-page-header
+  crumbLabel="Fechingen"
+  title="Über"
+  accent="Fechingen"
+  eyebrow="Seit 777 – 1250 Jahre im Jahr 2027"
+  intro="Ein Dorf mit langer Geschichte: nah an der Saarbrücker Innenstadt und doch im Grünen, mit einer der ältesten Kirchen des Saarlandes und einer ganz besonderen Tochter – der Gänsegretel."
+/>
+
+<div class="container section">
+  <ul class="facts" aria-label="Fechingen in Zahlen">
+    @for (fact of facts; track fact.value) {
+      <li class="card fact">
+        <span class="value">{{ fact.value }}</span>
+        <span class="label">{{ fact.label }}</span>
+      </li>
+    }
+  </ul>
+
+  <section class="intro-grid" aria-labelledby="dorf">
+    <div class="prose">
+      <span class="eyebrow">Das Dorf</span>
+      <h2 id="dorf" class="section-title">Über das Dorf</h2>
+      <p>
+        Fechingen gehört heute zum Stadtteil Brebach-Fechingen im Stadtbezirk Halberg der
+        Landeshauptstadt Saarbrücken. Bis 1959 war Fechingen eine eigenständige Gemeinde, dann
+        schloss es sich mit dem Nachbarort Brebach zusammen; seit dem 1. Januar 1974 ist
+        Brebach-Fechingen ein Stadtteil von Saarbrücken.
+      </p>
+      <p>
+        Obwohl die Innenstadt nah ist, hat Fechingen seinen ländlichen, naturnahen Charakter
+        bewahrt. Weite Teile der Felder und Fluren stehen unter Natur- oder Landschaftsschutz. Durch
+        das Dorf fließt der Fechinger Bach; die Brücken darüber schmückt der Obst- und
+        Gartenbauverein jedes Jahr mit Blumen.
+      </p>
+      <p>
+        Ursprünglich war Fechingen ein Bauerndorf. Mit der Industrialisierung und der Halberger
+        Hütte im benachbarten Brebach wurde es zum Arbeiter-Bauerndorf; heute ist es ein beliebter
+        Wohnort mit einem regen Vereinsleben.
+      </p>
+    </div>
+    <aside class="card jubilee" aria-labelledby="jubilaeum-1250">
+      <app-crest-mark class="jubilee-mark" />
+      <span class="eyebrow">Jubiläum 2027</span>
+      <h3 id="jubilaeum-1250"><em class="accent">1250</em> Jahre Fechingen</h3>
+      <p>
+        Im Jahr 777 wurde Fechingen zum ersten Mal urkundlich erwähnt: Abt Fulrad vermachte in
+        seinem Testament das Hofgut Fechingen dem Kloster St. Denis bei Paris. 2027 feiert das Dorf
+        damit sein 1250-jähriges Bestehen.
+      </p>
+      <a routerLink="/jubilaeum-2027" class="btn btn-gold">
+        Termine zum Jubiläum
+        <app-icon name="arrow-right" />
+      </a>
+    </aside>
+  </section>
+
+  <section aria-labelledby="geschichte">
+    <span class="eyebrow">Zeitreise</span>
+    <h2 id="geschichte" class="section-title">Geschichte</h2>
+    <ol class="timeline">
+      @for (entry of timeline; track entry.year; let last = $last) {
+        <li [class.highlight]="last">
+          <span class="year">{{ entry.year }}</span>
+          <div class="entry">
+            <h3>{{ entry.title }}</h3>
+            <p>{{ entry.text }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="church" aria-labelledby="kirche">
+    <div class="prose">
+      <span class="eyebrow">Wahrzeichen</span>
+      <h2 id="kirche" class="section-title">Die Kirche auf dem Kirchberg</h2>
+      <p>
+        Die evangelische Kirche auf dem Kirchberg zählt zu den ältesten christlichen Bauwerken des
+        Saarlandes und steht unter Denkmalschutz. Schon im 8. Jahrhundert stand hier eine hölzerne
+        Kapelle; Ausgrabungen im Jahr 1965 zeigten, dass das älteste Mauerwerk noch vor dem Jahr 900
+        entstand.
+      </p>
+      <p>
+        Erbaut wurde die Kirche wahrscheinlich unter Graf Simon I. von Saarbrücken (1135–1181). Um
+        1290 wurde sie erweitert und erhielt ihren Turm, der bis heute steht. 1712 wurde das
+        mittelalterliche Kirchenschiff abgerissen und breiter wieder aufgebaut; der romanische
+        Türsturz aus dem 12. Jahrhundert sitzt heute über dem Eingang zum Turm.
+      </p>
+      <p>
+        Die Kirche ist Station am grenzüberschreitenden Pilgerweg „Sternenweg / Chemin des étoiles“.
+        Ein Meditationsweg rund um die Kirche lädt zum Innehalten ein.
+      </p>
+    </div>
+  </section>
+
+  <section aria-labelledby="sehenswert">
+    <span class="eyebrow">Entdecken</span>
+    <h2 id="sehenswert" class="section-title">Sehenswertes</h2>
+    <ul class="grid">
+      @for (sight of sights; track sight.title) {
+        <li class="card sight">
+          <span class="icon-tile"><app-icon name="map-pin" /></span>
+          <h3>{{ sight.title }}</h3>
+          <p class="muted">{{ sight.text }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="card gretel" aria-labelledby="gaensegretel">
+    <app-crest-mark class="gretel-mark" />
+    <div class="prose">
+      <span class="eyebrow">Die berühmteste Fechingerin</span>
+      <h2 id="gaensegretel">Die Geschichte der <em class="accent">Gänsegretel</em></h2>
+      <p>
+        Wer nach Fechingen kommt, wird auf den Ortsschildern im „Gänsegreteldorf Fechingen“ begrüßt.
+        Die Schilder stellte die ARGE in den 1990er Jahren auf – zur Erinnerung an Katharina
+        Margaretha Kest, die im 18. Jahrhundert als Bauerntochter in Fechingen geboren wurde.
+      </p>
+      <p>
+        Ihren Spitznamen verdankt sie einer Begebenheit aus ihrer Konfirmandenzeit: Auf dem Weg zum
+        Unterricht nach Bischmisheim rettete sie eine Gans des Pfarrers vor übermütigen Jungen, nahm
+        das Tier kurzerhand unter den Arm und brachte es seinem Besitzer zurück. Der Name
+        „Gänsegretel“ blieb ihr ein Leben lang.
+      </p>
+      <p>
+        Ihr gelang ein für die damalige Zeit außergewöhnlicher Aufstieg: 1787 wurde sie die zweite
+        Ehefrau des Fürsten Ludwig von Nassau-Saarbrücken. Sie wurde zur Reichsgräfin von Ottweiler
+        erhoben, und vom französischen König Ludwig XVI. erhielt das Paar den Titel Herzog und
+        Herzogin von Dillingen. Noch heute stammen etliche Fechinger von ihren Geschwistern ab; die
+        Krone im Fechinger Wappen erinnert an sie.
+      </p>
+    </div>
+  </section>
+
+  <footer class="sources">
+    <h2>Quellen</h2>
+    <ul>
+      @for (source of sources; track source.url) {
+        <li>
+          <a [href]="source.url" target="_blank" rel="noopener">{{ source.label }}</a>
+        </li>
+      }
+    </ul>
+  </footer>
+</div>

@@ -35,7 +35,8 @@ export class Jubilaeum {
     inject(SeoService).set({
       title: 'Jubiläum 2027',
       path: '/jubilaeum-2027',
-      description: 'Alle Termine und Veranstaltungen zum Jubiläum 2027 in Fechingen.',
+      description:
+        '1250 Jahre Fechingen: Alle Termine und Veranstaltungen zum Jubiläum 2027 – 777 wurde Fechingen erstmals urkundlich erwähnt.',
     });
   }
 

@@ -169,8 +169,8 @@ Alle Lücken sind auf der Website als gelbe TODO-Kästen sichtbar:
 
 - **Die ARGE:** Chronik von Günter Nieser
 - **Der Vorstand:** Mitglieder, Fotos, Texte, Gruppenbild (Foto: Heiko Lehmann) in `features/vorstand/vorstand.data.ts`
-- **Fechingen:** „Über das Dorf“ und „Gänsegretelgeschichte“
+- **Fechingen:** Texte stehen (recherchiert, Quellen auf der Seite); ggf. Fotos ergänzen und Texte von Ortskundigen gegenlesen lassen
 - **Vereine:** Daten von Jens in `features/vereine/vereine.data.ts` (Struktur entspricht späteren Tabellen `clubs` / `club_activities`)
-- **Jubiläum 2027:** Einleitungstext; Termine über Admin → Termine
+- **Jubiläum 2027 (1250 Jahre Fechingen):** Einleitungstext und Programm; Termine über Admin → Termine
 - **Impressum** und **Datenschutzerklärung**
 - **Logo:** `src/assets/logo/` enthält eine aus der Vorlage zugeschnittene Variante ohne Internetadresse – bei Bedarf durch die Originaldatei ersetzen

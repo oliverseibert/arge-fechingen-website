@@ -29,8 +29,14 @@ export class Home {
     {
       path: '/jubilaeum-2027',
       title: 'Jubiläum 2027',
-      text: 'Alle Termine zum Jubiläum im Überblick.',
+      text: '1250 Jahre Fechingen – alle Termine im Überblick.',
       icon: 'sparkles',
+    },
+    {
+      path: '/fechingen',
+      title: 'Fechingen',
+      text: 'Geschichte des Dorfes und die Gänsegretel.',
+      icon: 'map-pin',
     },
     {
       path: '/vereine',
@@ -43,6 +49,12 @@ export class Home {
       title: 'Die ARGE',
       text: 'Geschichte und Chronik der ARGE.',
       icon: 'landmark',
+    },
+    {
+      path: '/vorstand',
+      title: 'Der Vorstand',
+      text: 'Die Menschen hinter der ARGE.',
+      icon: 'users',
     },
   ];
 

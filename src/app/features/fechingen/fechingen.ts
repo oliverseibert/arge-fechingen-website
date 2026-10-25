@@ -1,51 +1,30 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SeoService } from '../../core/seo.service';
+import { CrestMark } from '../../shared/crest-mark';
+import { Icon } from '../../shared/icon';
 import { PageHeader } from '../../shared/page-header';
-import { Todo } from '../../shared/todo';
+import { FACTS, SIGHTS, SOURCES, TIMELINE } from './fechingen.data';
 
 @Component({
   selector: 'app-fechingen',
-  imports: [PageHeader, Todo],
-  template: `
-    <app-page-header
-      crumbLabel="Fechingen"
-      title="Über"
-      accent="Fechingen"
-      intro="Das Dorf und die Geschichte der Gänsegretel."
-    />
-    <div class="container section sections">
-      <section class="card" aria-labelledby="dorf">
-        <span class="eyebrow">Das Dorf</span>
-        <h2 id="dorf">Über das Dorf</h2>
-        <app-todo>Text „Über das Dorf“ einfügen (ggf. mit Bildern)</app-todo>
-      </section>
-      <section class="card" aria-labelledby="gaensegretel">
-        <span class="eyebrow">Sage</span>
-        <h2 id="gaensegretel">Gänsegretelgeschichte</h2>
-        <app-todo>Gänsegretelgeschichte einfügen</app-todo>
-      </section>
-    </div>
-  `,
-  styles: `
-    .sections {
-      display: grid;
-      gap: var(--space-4);
-      @media (min-width: 56rem) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    .card {
-      padding: clamp(1.5rem, 3vw, 2.5rem);
-    }
-  `,
+  imports: [PageHeader, RouterLink, CrestMark, Icon],
+  templateUrl: './fechingen.html',
+  styleUrl: './fechingen.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Fechingen {
+  protected readonly facts = FACTS;
+  protected readonly timeline = TIMELINE;
+  protected readonly sights = SIGHTS;
+  protected readonly sources = SOURCES;
+
   constructor() {
     inject(SeoService).set({
       title: 'Fechingen',
       path: '/fechingen',
-      description: 'Über das Dorf Fechingen und die Geschichte der Gänsegretel.',
+      description:
+        'Fechingen – seit 777 urkundlich erwähnt, 2027 feiert das Dorf 1250 Jahre. Geschichte, Kirche auf dem Kirchberg, Sehenswertes und die Geschichte der Gänsegretel.',
     });
   }
 }
