@@ -1,7 +1,12 @@
-<div class="page container layout">
-  <section aria-labelledby="news-title">
-    <h1 id="news-title">Neues</h1>
+<app-page-header
+  crumbLabel="Neues"
+  title="Neues aus der"
+  accent="ARGE"
+  intro="Aktuelle Neuigkeiten der ARGE Fechingen."
+/>
 
+<div class="container section layout">
+  <section aria-label="Beiträge">
     @if (news.isLoading()) {
       <p aria-live="polite">Neuigkeiten werden geladen …</p>
     } @else if (news.error()) {
@@ -11,41 +16,46 @@
     } @else {
       @let items = news.value() ?? [];
       @if (items.length === 0) {
-        <p class="muted">Derzeit gibt es keine Neuigkeiten.</p>
+        <div class="card empty">
+          <span class="icon-tile"><app-icon name="newspaper" /></span>
+          <div>
+            <h2>Noch keine Neuigkeiten</h2>
+            <p class="muted">Derzeit gibt es keine Neuigkeiten. Schauen Sie bald wieder vorbei.</p>
+          </div>
+        </div>
       } @else {
         <ul class="news">
-          @for (item of items; track item.id) {
-            <li>
-              <article class="card news-item">
+          @for (item of items; track item.id; let first = $first) {
+            <li class="card card-interactive news-item" [class.featured]="first">
+              <div class="media">
                 @if (supabase.publicImageUrl(item.image_path); as src) {
                   <img
                     [src]="src"
                     [alt]="item.image_alt ?? ''"
-                    width="640"
-                    height="360"
+                    width="800"
+                    height="450"
                     loading="lazy"
                   />
+                } @else {
+                  <div class="media-placeholder"><app-crest-mark class="media-mark" /></div>
                 }
-                <div>
-                  <h2>
-                    <a [routerLink]="['/neues', item.slug]">{{ item.title }}</a>
-                  </h2>
-                  <p class="date">
-                    <time [attr.datetime]="item.published_at">{{
-                      formatDate(item.published_at)
-                    }}</time>
-                  </p>
-                  @if (item.teaser) {
-                    <p>{{ item.teaser }}</p>
-                  }
-                  <a
-                    [routerLink]="['/neues', item.slug]"
-                    class="more"
-                    [attr.aria-label]="'Weiterlesen: ' + item.title"
-                    >Weiterlesen</a
-                  >
-                </div>
-              </article>
+              </div>
+              <div class="body">
+                <time class="date" [attr.datetime]="item.published_at">{{
+                  formatDate(item.published_at)
+                }}</time>
+                <h2>
+                  <a [routerLink]="['/neues', item.slug]" class="stretched-link">{{
+                    item.title
+                  }}</a>
+                </h2>
+                @if (item.teaser) {
+                  <p class="muted teaser">{{ item.teaser }}</p>
+                }
+                <span class="more" aria-hidden="true"
+                  >Weiterlesen <app-icon name="arrow-right"
+                /></span>
+              </div>
             </li>
           }
         </ul>
@@ -54,7 +64,8 @@
   </section>
 
   <aside aria-labelledby="newsletter-title">
-    <div class="card">
+    <div class="card newsletter">
+      <span class="icon-tile"><app-icon name="mail" /></span>
       <h2 id="newsletter-title">Newsletter</h2>
       <app-newsletter-form />
     </div>

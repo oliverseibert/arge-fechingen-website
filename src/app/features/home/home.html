@@ -1,0 +1,60 @@
+<section class="hero" aria-labelledby="hero-title">
+  <app-crest-mark class="watermark" />
+  <div class="container hero-grid">
+    <div class="hero-text fade-up">
+      <p class="pill">Arbeitsgemeinschaft in Saarbrücken-Fechingen</p>
+      <h1 id="hero-title">ARGE <em class="accent">Fechingen</em></h1>
+      <p class="lead">Neuigkeiten, Termine und Informationen rund um Fechingen.</p>
+      <div class="actions hero-actions">
+        <a routerLink="/neues" class="btn btn-lg">Neuigkeiten lesen</a>
+        <a routerLink="/jubilaeum-2027" class="btn btn-lg btn-secondary">
+          Jubiläum 2027
+          <app-icon name="arrow-right" />
+        </a>
+      </div>
+    </div>
+    <div class="hero-logo fade-up">
+      <img
+        src="/assets/logo/arge-fechingen-logo.webp"
+        alt="Logo der ARGE Fechingen: Fechinger Wappen mit Krone, Schriftzug „ARGE Fechingen“, Kirche mit Turm und blaue Welle"
+        width="1201"
+        height="780"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="container section quick" aria-labelledby="quick-title">
+  <span class="eyebrow">Entdecken</span>
+  <h2 id="quick-title">Was es hier <em class="accent">gibt</em></h2>
+  <ul class="grid">
+    @for (link of links; track link.path) {
+      <li class="card card-interactive">
+        <div class="card-top">
+          <span class="icon-tile"><app-icon [name]="link.icon" /></span>
+          <app-icon name="arrow-up-right" class="corner" />
+        </div>
+        <h3>
+          <a [routerLink]="link.path" class="stretched-link">{{ link.title }}</a>
+        </h3>
+        <p class="muted">{{ link.text }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<section class="container jubilee-wrap" aria-labelledby="jubilee-title">
+  <div class="jubilee">
+    <app-crest-mark class="jubilee-mark" />
+    <div>
+      <span class="eyebrow">Vormerken</span>
+      <h2 id="jubilee-title">Jubiläum <em class="accent">2027</em></h2>
+      <p>Alle Veranstaltungen und Termine zum Jubiläumsjahr – nach Monaten sortiert.</p>
+    </div>
+    <a routerLink="/jubilaeum-2027" class="btn btn-lg btn-gold">
+      Zu den Terminen
+      <app-icon name="arrow-right" />
+    </a>
+  </div>
+</section>

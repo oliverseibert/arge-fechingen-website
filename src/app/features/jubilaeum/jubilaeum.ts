@@ -1,12 +1,20 @@
 import { ChangeDetectionStrategy, Component, computed, inject, resource } from '@angular/core';
 import { EventsService, groupEventsByMonth } from '../../data/events.service';
 import { SeoService } from '../../core/seo.service';
+import { Icon } from '../../shared/icon';
+import { PageHeader } from '../../shared/page-header';
 import { Todo } from '../../shared/todo';
-import { formatDate, formatTime, formatWeekday } from '../../shared/format';
+import {
+  formatDate,
+  formatDay,
+  formatShortWeekday,
+  formatTime,
+  formatWeekday,
+} from '../../shared/format';
 
 @Component({
   selector: 'app-jubilaeum',
-  imports: [Todo],
+  imports: [PageHeader, Icon, Todo],
   templateUrl: './jubilaeum.html',
   styleUrl: './jubilaeum.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +23,8 @@ export class Jubilaeum {
   private readonly eventsService = inject(EventsService);
   protected readonly formatWeekday = formatWeekday;
   protected readonly formatTime = formatTime;
+  protected readonly formatDay = formatDay;
+  protected readonly formatShortWeekday = formatShortWeekday;
 
   protected readonly events = resource({
     loader: () => this.eventsService.listByCategory('jubilaeum_2027'),

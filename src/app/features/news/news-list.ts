@@ -4,11 +4,14 @@ import { NewsService } from '../../data/news.service';
 import { SupabaseService } from '../../core/supabase.service';
 import { SeoService } from '../../core/seo.service';
 import { formatDate } from '../../shared/format';
+import { CrestMark } from '../../shared/crest-mark';
+import { Icon } from '../../shared/icon';
+import { PageHeader } from '../../shared/page-header';
 import { NewsletterForm } from '../newsletter/newsletter-form';
 
 @Component({
   selector: 'app-news-list',
-  imports: [RouterLink, NewsletterForm],
+  imports: [RouterLink, NewsletterForm, PageHeader, Icon, CrestMark],
   templateUrl: './news-list.html',
   styleUrl: './news-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

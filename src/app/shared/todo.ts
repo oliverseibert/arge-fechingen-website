@@ -7,12 +7,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styles: `
     :host {
       display: block;
-      padding: var(--space-3);
+      padding: var(--space-3) var(--space-4);
       margin-block: var(--space-3);
-      border: 2px dashed var(--color-todo-border);
+      border: 1px dashed var(--color-todo-border);
       border-radius: var(--radius);
       background: var(--color-todo-bg);
-      color: #3d3100;
+      color: #4a3c00;
+      font-size: 0.95rem;
     }
     .label {
       margin-right: 0.35em;

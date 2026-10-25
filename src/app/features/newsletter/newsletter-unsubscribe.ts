@@ -2,40 +2,43 @@ import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angu
 import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../core/supabase.service';
 import { SeoService } from '../../core/seo.service';
+import { PageHeader } from '../../shared/page-header';
 
 @Component({
   selector: 'app-newsletter-unsubscribe',
-  imports: [RouterLink],
+  imports: [RouterLink, PageHeader],
   template: `
-    <article class="page container prose">
-      <h1>Newsletter abbestellen</h1>
-      @switch (state()) {
-        @case ('success') {
-          <p class="alert alert-success" role="status">Sie wurden vom Newsletter abgemeldet.</p>
-        }
-        @case ('error') {
-          <p class="alert alert-error" role="alert">
-            Der Abmeldelink ist ungültig. Bitte wenden Sie sich an uns.
-          </p>
-        }
-        @default {
-          @if (token()) {
-            <p>Möchten Sie den Newsletter der ARGE Fechingen wirklich abbestellen?</p>
-            <button
-              type="button"
-              class="btn"
-              [disabled]="state() === 'sending'"
-              (click)="unsubscribe()"
-            >
-              {{ state() === 'sending' ? 'Wird abgemeldet …' : 'Jetzt abmelden' }}
-            </button>
-          } @else {
-            <p class="alert alert-error" role="alert">Der Abmeldelink ist unvollständig.</p>
+    <app-page-header title="Newsletter" accent="abbestellen" />
+    <div class="container section">
+      <div class="prose">
+        @switch (state()) {
+          @case ('success') {
+            <p class="alert alert-success" role="status">Sie wurden vom Newsletter abgemeldet.</p>
+          }
+          @case ('error') {
+            <p class="alert alert-error" role="alert">
+              Der Abmeldelink ist ungültig. Bitte wenden Sie sich an uns.
+            </p>
+          }
+          @default {
+            @if (token()) {
+              <p>Möchten Sie den Newsletter der ARGE Fechingen wirklich abbestellen?</p>
+              <button
+                type="button"
+                class="btn"
+                [disabled]="state() === 'sending'"
+                (click)="unsubscribe()"
+              >
+                {{ state() === 'sending' ? 'Wird abgemeldet …' : 'Jetzt abmelden' }}
+              </button>
+            } @else {
+              <p class="alert alert-error" role="alert">Der Abmeldelink ist unvollständig.</p>
+            }
           }
         }
-      }
-      <p class="back"><a routerLink="/">Zur Startseite</a></p>
-    </article>
+        <p class="back"><a routerLink="/">Zur Startseite</a></p>
+      </div>
+    </div>
   `,
   styles: `
     .back {

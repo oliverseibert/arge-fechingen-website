@@ -68,16 +68,22 @@ import { SeoService } from '../../core/seo.service';
     .admin {
       display: grid;
       gap: var(--space-4);
-      padding-block: var(--space-4) var(--space-6);
+      padding-block: var(--space-5) var(--space-6);
       @media (min-width: 56rem) {
         grid-template-columns: 14rem minmax(0, 1fr);
       }
     }
     .side {
       align-self: start;
-      background: var(--color-surface);
-      border-radius: var(--radius);
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
       padding: var(--space-3);
+      @media (min-width: 56rem) {
+        position: sticky;
+        top: calc(var(--header-height) + var(--space-3));
+      }
     }
     .user {
       overflow-wrap: anywhere;
@@ -89,17 +95,19 @@ import { SeoService } from '../../core/seo.service';
     }
     nav a {
       display: block;
-      padding: var(--space-2);
-      border-radius: var(--radius);
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
       text-decoration: none;
-      font-weight: 600;
-      color: var(--color-navy);
+      font-weight: 500;
+      color: var(--color-text);
       &:hover {
-        background: var(--color-blue-light);
+        background: var(--color-surface);
+        color: var(--color-primary-ink);
       }
       &.active {
-        background: var(--color-blue-dark);
-        color: #fff;
+        background: var(--color-accent);
+        color: var(--color-primary-ink);
+        font-weight: 600;
       }
     }
   `,

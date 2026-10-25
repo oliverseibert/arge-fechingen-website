@@ -1,84 +1,96 @@
-<article class="page container">
-  <h1>Vereine</h1>
+<app-page-header
+  crumbLabel="Vereine"
+  title="Vereine in"
+  accent="Fechingen"
+  intro="Kontaktdaten, Trainings und Proben der Fechinger Vereine."
+/>
+
+<div class="container section">
   <app-todo>Vereinsdaten, Trainings und Proben von Jens eintragen (vereine.data.ts)</app-todo>
 
-  <h2>Vereine in Fechingen</h2>
-  <ul class="grid clubs">
+  <span class="eyebrow">Übersicht</span>
+  <h2 class="section-title">Vereine</h2>
+  <ul class="grid">
     @for (club of clubs; track club.id) {
-      <li class="card">
+      <li class="card club">
+        <span class="icon-tile"><app-icon name="users" /></span>
         <h3>{{ club.name }}</h3>
         @if (club.description) {
-          <p>{{ club.description }}</p>
+          <p class="muted">{{ club.description }}</p>
         }
-        <dl class="contact">
+        <ul class="contact">
           @if (club.contact_name) {
-            <dt>Kontakt</dt>
-            <dd>{{ club.contact_name }}</dd>
+            <li>
+              <app-icon name="users" /><span class="visually-hidden">Kontakt: </span
+              >{{ club.contact_name }}
+            </li>
           }
           @if (club.contact_email) {
-            <dt>E-Mail</dt>
-            <dd>
+            <li>
+              <app-icon name="mail" />
               <a [href]="'mailto:' + club.contact_email">{{ club.contact_email }}</a>
-            </dd>
+            </li>
           }
           @if (club.contact_phone) {
-            <dt>Telefon</dt>
-            <dd>
+            <li>
+              <app-icon name="phone" />
               <a [href]="'tel:' + club.contact_phone">{{ club.contact_phone }}</a>
-            </dd>
+            </li>
           }
           @if (club.website) {
-            <dt>Website</dt>
-            <dd>
+            <li>
+              <app-icon name="globe" />
               <a [href]="club.website" target="_blank" rel="noopener">{{ club.website }}</a>
-            </dd>
+            </li>
           }
-        </dl>
+        </ul>
       </li>
     }
   </ul>
 
-  <h2>Regelmäßige Trainings und Proben</h2>
-  <div class="table-wrap">
-    <table class="table">
-      <caption class="visually-hidden">
-        Regelmäßige Trainings und Proben der Vereine
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">Tag</th>
-          <th scope="col">Uhrzeit</th>
-          <th scope="col">Angebot</th>
-          <th scope="col">Verein</th>
-          <th scope="col">Ort</th>
-          <th scope="col">Ansprechpartner/in</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (a of activities; track a.id) {
-          <tr>
-            <td>
-              {{ weekdays[a.weekday] }}
-              @if (a.interval_note) {
-                <br /><span class="muted">{{ a.interval_note }}</span>
-              }
-            </td>
-            <td>{{ timeRange(a) }}</td>
-            <td>{{ a.title }}</td>
-            <td>{{ clubName(a) }}</td>
-            <td>{{ a.location }}</td>
-            <td>
-              {{ a.contact_name }}
-              @if (a.contact_email) {
-                <br /><a [href]="'mailto:' + a.contact_email">{{ a.contact_email }}</a>
-              }
-              @if (a.contact_phone) {
-                <br /><a [href]="'tel:' + a.contact_phone">{{ a.contact_phone }}</a>
-              }
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</article>
+  <span class="eyebrow">Wochenplan</span>
+  <h2 class="section-title">Regelmäßige Trainings und Proben</h2>
+  <ul class="schedule">
+    @for (a of activities; track a.id) {
+      <li class="card activity">
+        <div class="when">
+          <span class="day">{{ weekdays[a.weekday] }}</span>
+          <span class="time"><app-icon name="clock" />{{ timeRange(a) }}</span>
+          @if (a.interval_note) {
+            <span class="interval">{{ a.interval_note }}</span>
+          }
+        </div>
+        <div class="what">
+          <h3>{{ a.title }}</h3>
+          <p class="club-name">{{ clubName(a) }}</p>
+          <ul class="contact">
+            @if (a.location) {
+              <li>
+                <app-icon name="map-pin" /><span class="visually-hidden">Ort: </span
+                >{{ a.location }}
+              </li>
+            }
+            @if (a.contact_name) {
+              <li>
+                <app-icon name="users" /><span class="visually-hidden">Ansprechpartner/in: </span
+                >{{ a.contact_name }}
+              </li>
+            }
+            @if (a.contact_email) {
+              <li>
+                <app-icon name="mail" />
+                <a [href]="'mailto:' + a.contact_email">{{ a.contact_email }}</a>
+              </li>
+            }
+            @if (a.contact_phone) {
+              <li>
+                <app-icon name="phone" />
+                <a [href]="'tel:' + a.contact_phone">{{ a.contact_phone }}</a>
+              </li>
+            }
+          </ul>
+        </div>
+      </li>
+    }
+  </ul>
+</div>

@@ -1,8 +1,12 @@
-<article class="page container">
-  <h1>Jubiläum 2027</h1>
+<app-page-header
+  title="Jubiläum"
+  accent="2027"
+  intro="Alle Termine zum Jubiläumsjahr, nach Monaten sortiert."
+/>
+
+<div class="container section">
   <app-todo>Einleitungstext zum Jubiläum 2027 einfügen</app-todo>
 
-  <h2>Termine</h2>
   @if (events.isLoading()) {
     <p aria-live="polite">Termine werden geladen …</p>
   } @else if (events.error()) {
@@ -10,38 +14,55 @@
       Die Termine konnten nicht geladen werden. Bitte versuchen Sie es später erneut.
     </p>
   } @else if (months().length === 0) {
-    <p class="muted">Die Termine werden in Kürze veröffentlicht.</p>
+    <div class="card empty">
+      <span class="icon-tile"><app-icon name="calendar" /></span>
+      <div>
+        <h2>Die Termine folgen in Kürze</h2>
+        <p class="muted">Sobald die Veranstaltungen feststehen, finden Sie sie hier.</p>
+      </div>
+    </div>
   } @else {
     @for (month of months(); track month.key) {
       <section class="month" [attr.aria-labelledby]="'monat-' + month.key">
-        <h3 [id]="'monat-' + month.key">{{ month.label }}</h3>
+        <h2 [id]="'monat-' + month.key">{{ month.label }}</h2>
         <ul class="events">
           @for (event of month.events; track event.id) {
             <li class="card event">
-              <p class="when">
-                <time [attr.datetime]="event.starts_at"
-                  >{{ formatWeekday(event.starts_at) }}, {{ formatTime(event.starts_at) }} Uhr</time
-                >
-                @if (event.ends_at) {
-                  –
-                  <time [attr.datetime]="event.ends_at">{{
-                    endLabel(event.starts_at, event.ends_at)
-                  }}</time>
+              <div class="date-tile" aria-hidden="true">
+                <span class="weekday">{{ formatShortWeekday(event.starts_at) }}</span>
+                <span class="day">{{ formatDay(event.starts_at) }}</span>
+              </div>
+              <div class="body">
+                <h3>{{ event.title }}</h3>
+                <ul class="meta">
+                  <li>
+                    <app-icon name="clock" />
+                    <time [attr.datetime]="event.starts_at"
+                      >{{ formatWeekday(event.starts_at) }},
+                      {{ formatTime(event.starts_at) }} Uhr</time
+                    >
+                    @if (event.ends_at) {
+                      –
+                      <time [attr.datetime]="event.ends_at">{{
+                        endLabel(event.starts_at, event.ends_at)
+                      }}</time>
+                    }
+                  </li>
+                  @if (event.location) {
+                    <li>
+                      <app-icon name="map-pin" /><span class="visually-hidden">Ort: </span
+                      >{{ event.location }}
+                    </li>
+                  }
+                </ul>
+                @if (event.description) {
+                  <p class="description">{{ event.description }}</p>
                 }
-              </p>
-              <h4>{{ event.title }}</h4>
-              @if (event.location) {
-                <p class="where">
-                  <span class="visually-hidden">Ort: </span>📍 {{ event.location }}
-                </p>
-              }
-              @if (event.description) {
-                <p class="description">{{ event.description }}</p>
-              }
+              </div>
             </li>
           }
         </ul>
       </section>
     }
   }
-</article>
+</div>

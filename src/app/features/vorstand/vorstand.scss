@@ -1,43 +1,54 @@
 .group {
-  margin: 0 0 var(--space-5);
-  max-width: 48rem;
+  margin: var(--space-4) 0 0;
 
   img {
     width: 100%;
-    border-radius: var(--radius);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lift);
   }
 
   figcaption {
     margin-top: var(--space-2);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--color-text-muted);
   }
 }
 
 .photo-placeholder {
+  position: relative;
   display: grid;
   place-items: center;
   aspect-ratio: 1;
-  background: var(--color-surface);
-  border: 2px dashed var(--color-todo-border);
+  overflow: hidden;
   border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-surface));
   color: var(--color-text-muted);
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: var(--space-3);
+
+  span {
+    position: relative;
+  }
+}
+
+.placeholder-mark {
+  position: absolute;
+  width: 45%;
+  height: 50%;
+  color: color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
 .group-placeholder {
-  aspect-ratio: 3 / 2;
-}
-
-.members {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  aspect-ratio: 21 / 9;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
 }
 
 .member {
-  img {
+  padding: var(--space-3);
+
+  img,
+  .photo-placeholder {
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
@@ -46,11 +57,15 @@
   }
 
   h3 {
-    margin-bottom: var(--space-1);
+    margin: var(--space-2) 0 var(--space-1);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
   }
 }
 
 .role {
-  color: var(--color-blue-dark);
-  font-weight: 600;
+  align-self: flex-start;
 }

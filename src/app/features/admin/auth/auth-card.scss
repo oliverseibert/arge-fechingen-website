@@ -4,9 +4,14 @@
 
 .auth {
   max-width: 28rem;
-  margin: var(--space-5) auto var(--space-6);
+  margin: var(--space-6) auto var(--space-7);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .links {
   margin-top: var(--space-3);
+}
+
+h1 {
+  font-size: 2rem;
 }

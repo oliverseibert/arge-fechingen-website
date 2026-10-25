@@ -1,5 +1,11 @@
-<article class="page container">
-  <h1>Der Vorstand</h1>
+<app-page-header
+  crumbLabel="Der Vorstand"
+  title="Der"
+  accent="Vorstand"
+  intro="Der Vorstand der ARGE Fechingen stellt sich vor."
+/>
+
+<div class="container section">
   <app-todo
     >Inhalte zum Vorstand folgen (Fotos, Namen, Funktionen und Texte in vorstand.data.ts
     eintragen)</app-todo
@@ -14,13 +20,15 @@
         role="img"
         [attr.aria-label]="'Platzhalter: ' + gruppenbild.alt"
       >
-        TODO: Gruppenbild
+        <app-crest-mark class="placeholder-mark" />
+        <span>TODO: Gruppenbild</span>
       </div>
     }
     <figcaption>Foto: {{ gruppenbild.credit }}</figcaption>
   </figure>
 
-  <h2>Mitglieder</h2>
+  <span class="eyebrow">Team</span>
+  <h2 class="section-title">Mitglieder</h2>
   <ul class="grid members">
     @for (m of mitglieder; track $index) {
       <li class="card member">
@@ -34,13 +42,14 @@
           />
         } @else {
           <div class="photo-placeholder" role="img" aria-label="Platzhalter für Foto">
-            TODO: Foto
+            <app-crest-mark class="placeholder-mark" />
+            <span>TODO: Foto</span>
           </div>
         }
+        <span class="badge badge-primary role">{{ m.funktion }}</span>
         <h3>{{ m.name }}</h3>
-        <p class="role">{{ m.funktion }}</p>
-        <p>{{ m.text }}</p>
+        <p class="muted">{{ m.text }}</p>
       </li>
     }
   </ul>
-</article>
+</div>

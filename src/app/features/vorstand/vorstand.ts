@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SeoService } from '../../core/seo.service';
+import { CrestMark } from '../../shared/crest-mark';
+import { PageHeader } from '../../shared/page-header';
 import { Todo } from '../../shared/todo';
 import { GRUPPENBILD, VORSTAND } from './vorstand.data';
 
 @Component({
   selector: 'app-vorstand',
-  imports: [Todo],
+  imports: [PageHeader, CrestMark, Todo],
   templateUrl: './vorstand.html',
   styleUrl: './vorstand.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

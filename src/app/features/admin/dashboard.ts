@@ -9,21 +9,21 @@ import { AuthService } from '../../core/auth.service';
     <h1>Verwaltung</h1>
     <p>Willkommen{{ auth.profile()?.name ? ', ' + auth.profile()?.name : '' }}!</p>
     <ul class="grid tiles">
-      <li class="card">
-        <h2><a routerLink="/admin/news">News verwalten</a></h2>
+      <li class="card card-interactive">
+        <h2><a routerLink="/admin/news" class="stretched-link">News verwalten</a></h2>
         <p>Beiträge anlegen, bearbeiten und veröffentlichen.</p>
       </li>
-      <li class="card">
-        <h2><a routerLink="/admin/termine">Termine verwalten</a></h2>
+      <li class="card card-interactive">
+        <h2><a routerLink="/admin/termine" class="stretched-link">Termine verwalten</a></h2>
         <p>Termine für das Jubiläum 2027 pflegen.</p>
       </li>
       @if (auth.isAdmin()) {
-        <li class="card">
-          <h2><a routerLink="/admin/newsletter">Newsletter-Abos</a></h2>
+        <li class="card card-interactive">
+          <h2><a routerLink="/admin/newsletter" class="stretched-link">Newsletter-Abos</a></h2>
           <p>Abonnenten ansehen und als CSV exportieren.</p>
         </li>
-        <li class="card">
-          <h2><a routerLink="/admin/benutzer">Benutzer verwalten</a></h2>
+        <li class="card card-interactive">
+          <h2><a routerLink="/admin/benutzer" class="stretched-link">Benutzer verwalten</a></h2>
           <p>Benutzer einladen, Rollen vergeben, deaktivieren.</p>
         </li>
       }

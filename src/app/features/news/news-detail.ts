@@ -13,45 +13,65 @@ import { SupabaseService } from '../../core/supabase.service';
 import { SeoService } from '../../core/seo.service';
 import { MarkdownPipe } from '../../shared/markdown.pipe';
 import { formatDate } from '../../shared/format';
+import { Icon } from '../../shared/icon';
+import { Crumb, PageHeader } from '../../shared/page-header';
 
 @Component({
   selector: 'app-news-detail',
-  imports: [RouterLink, MarkdownPipe],
+  imports: [RouterLink, MarkdownPipe, PageHeader, Icon],
   template: `
-    <article class="page container prose">
-      <p><a routerLink="/neues">← Alle Neuigkeiten</a></p>
-      @if (news.isLoading()) {
-        <p aria-live="polite">Wird geladen …</p>
-      } @else if (news.error()) {
+    @if (news.isLoading()) {
+      <div class="container section"><p aria-live="polite">Wird geladen …</p></div>
+    } @else if (news.error()) {
+      <div class="container section">
         <p class="alert alert-error" role="alert">Der Beitrag konnte nicht geladen werden.</p>
-      } @else {
-        @if (news.value(); as item) {
-          <h1>{{ item.title }}</h1>
-          <p class="muted">
-            <time [attr.datetime]="item.published_at">{{ formatDate(item.published_at) }}</time>
-          </p>
+      </div>
+    } @else {
+      @if (news.value(); as item) {
+        <app-page-header
+          [title]="item.title"
+          [eyebrow]="formatDate(item.published_at)"
+          [intro]="item.teaser ?? undefined"
+          [crumbs]="crumbs"
+        />
+        <article class="container section">
           @if (supabase.publicImageUrl(item.image_path); as src) {
             <img class="image" [src]="src" [alt]="item.image_alt ?? ''" width="1200" height="675" />
           }
-          @if (item.teaser) {
-            <p class="lead">{{ item.teaser }}</p>
-          }
-          <div class="content" [innerHTML]="item.content | markdown"></div>
-        } @else {
-          <h1>Beitrag nicht gefunden</h1>
+          <div class="prose content" [innerHTML]="item.content | markdown"></div>
+          <p class="back">
+            <a routerLink="/neues" class="btn btn-secondary">
+              <app-icon name="arrow-right" class="flip" />
+              Alle Neuigkeiten
+            </a>
+          </p>
+        </article>
+      } @else {
+        <app-page-header title="Beitrag nicht gefunden" [crumbs]="crumbs" />
+        <div class="container section">
           <p>Diesen Beitrag gibt es nicht oder er ist nicht mehr verfügbar.</p>
-        }
+          <a routerLink="/neues" class="btn">Alle Neuigkeiten</a>
+        </div>
       }
-    </article>
+    }
   `,
   styles: `
     .image {
+      display: block;
       width: 100%;
-      border-radius: var(--radius);
-      margin-bottom: var(--space-4);
+      max-width: 60rem;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lift);
+      margin-bottom: var(--space-5);
     }
-    .content :is(img) {
-      border-radius: var(--radius);
+    .content {
+      font-size: 1.075rem;
+    }
+    .back {
+      margin-top: var(--space-5);
+    }
+    .flip {
+      transform: rotate(180deg);
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,6 +82,7 @@ export class NewsDetail {
   private readonly responseInit = inject(RESPONSE_INIT, { optional: true });
   protected readonly supabase = inject(SupabaseService);
   protected readonly formatDate = formatDate;
+  protected readonly crumbs: Crumb[] = [{ label: 'Neues', link: '/neues' }];
 
   readonly slug = input.required<string>();
 

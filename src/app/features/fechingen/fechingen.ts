@@ -1,24 +1,42 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SeoService } from '../../core/seo.service';
+import { PageHeader } from '../../shared/page-header';
 import { Todo } from '../../shared/todo';
 
 @Component({
   selector: 'app-fechingen',
-  imports: [Todo],
+  imports: [PageHeader, Todo],
   template: `
-    <article class="page container prose">
-      <h1>Fechingen</h1>
-
-      <section aria-labelledby="dorf">
+    <app-page-header
+      crumbLabel="Fechingen"
+      title="Über"
+      accent="Fechingen"
+      intro="Das Dorf und die Geschichte der Gänsegretel."
+    />
+    <div class="container section sections">
+      <section class="card" aria-labelledby="dorf">
+        <span class="eyebrow">Das Dorf</span>
         <h2 id="dorf">Über das Dorf</h2>
         <app-todo>Text „Über das Dorf“ einfügen (ggf. mit Bildern)</app-todo>
       </section>
-
-      <section aria-labelledby="gaensegretel">
+      <section class="card" aria-labelledby="gaensegretel">
+        <span class="eyebrow">Sage</span>
         <h2 id="gaensegretel">Gänsegretelgeschichte</h2>
         <app-todo>Gänsegretelgeschichte einfügen</app-todo>
       </section>
-    </article>
+    </div>
+  `,
+  styles: `
+    .sections {
+      display: grid;
+      gap: var(--space-4);
+      @media (min-width: 56rem) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .card {
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

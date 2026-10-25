@@ -57,3 +57,14 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, '')
     .slice(0, 80);
 }
+
+const dayFormat = new Intl.DateTimeFormat('de-DE', { timeZone: TIME_ZONE, day: 'numeric' });
+const shortWeekdayFormat = new Intl.DateTimeFormat('de-DE', {
+  timeZone: TIME_ZONE,
+  weekday: 'short',
+});
+
+/** Tag im Monat, z. B. „15“ */
+export const formatDay = (iso: string): string => dayFormat.format(new Date(iso));
+/** Kurzer Wochentag, z. B. „Fr.“ */
+export const formatShortWeekday = (iso: string): string => shortWeekdayFormat.format(new Date(iso));

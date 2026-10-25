@@ -1,7 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DOCUMENT,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
+import { Icon } from '../shared/icon';
+import { Brand } from './brand';
 
 export const MAIN_NAV = [
   { path: '/neues', label: 'Neues' },
@@ -15,42 +24,8 @@ export const MAIN_NAV = [
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
-  template: `
-    <header class="header">
-      <div class="container header-inner">
-        <a routerLink="/" class="logo" aria-label="ARGE Fechingen – zur Startseite">
-          <img src="/assets/logo/arge-fechingen-logo-klein.webp" alt="" width="480" height="312" />
-        </a>
-
-        <button
-          type="button"
-          class="burger"
-          [attr.aria-expanded]="open()"
-          aria-controls="main-nav"
-          (click)="open.set(!open())"
-        >
-          <span class="burger-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">{{ open() ? 'Menü schließen' : 'Menü öffnen' }}</span>
-        </button>
-
-        <nav id="main-nav" class="nav" [class.open]="open()" aria-label="Hauptnavigation">
-          <ul>
-            @for (item of nav; track item.path) {
-              <li>
-                <a
-                  [routerLink]="item.path"
-                  routerLinkActive="active"
-                  ariaCurrentWhenActive="page"
-                  >{{ item.label }}</a
-                >
-              </li>
-            }
-          </ul>
-        </nav>
-      </div>
-    </header>
-  `,
+  imports: [RouterLink, RouterLinkActive, Icon, Brand],
+  templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '(document:keydown.escape)': 'open.set(false)' },
@@ -67,5 +42,9 @@ export class Header {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.open.set(false));
+
+    // Seite hinter dem offenen Menü nicht scrollen
+    const body = inject(DOCUMENT).body;
+    effect(() => body.classList.toggle('nav-open', this.open()));
   }
 }

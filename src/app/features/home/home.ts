@@ -1,34 +1,51 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SeoService } from '../../core/seo.service';
+import { CrestMark } from '../../shared/crest-mark';
+import { Icon, IconName } from '../../shared/icon';
+
+interface QuickLink {
+  path: string;
+  title: string;
+  text: string;
+  icon: IconName;
+}
 
 @Component({
   selector: 'app-home',
-  template: `
-    <section class="hero container">
-      <h1 class="visually-hidden">ARGE Fechingen</h1>
-      <img
-        src="/assets/logo/arge-fechingen-logo.webp"
-        alt="Logo der ARGE Fechingen: Fechinger Wappen mit Krone, Schriftzug „ARGE Fechingen“, Kirche mit Turm und blaue Welle"
-        width="1201"
-        height="780"
-        fetchpriority="high"
-      />
-    </section>
-  `,
-  styles: `
-    .hero {
-      display: flex;
-      justify-content: center;
-      padding-block: var(--space-5) var(--space-6);
-    }
-    img {
-      width: min(100%, 56rem);
-      height: auto;
-    }
-  `,
+  imports: [RouterLink, CrestMark, Icon],
+  templateUrl: './home.html',
+  styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
+  protected readonly links: QuickLink[] = [
+    {
+      path: '/neues',
+      title: 'Neues',
+      text: 'Aktuelle Neuigkeiten aus der ARGE.',
+      icon: 'newspaper',
+    },
+    {
+      path: '/jubilaeum-2027',
+      title: 'Jubiläum 2027',
+      text: 'Alle Termine zum Jubiläum im Überblick.',
+      icon: 'sparkles',
+    },
+    {
+      path: '/vereine',
+      title: 'Vereine',
+      text: 'Vereine, Trainings und Proben in Fechingen.',
+      icon: 'users',
+    },
+    {
+      path: '/die-arge',
+      title: 'Die ARGE',
+      text: 'Geschichte und Chronik der ARGE.',
+      icon: 'landmark',
+    },
+  ];
+
   constructor() {
     inject(SeoService).set({
       path: '/',

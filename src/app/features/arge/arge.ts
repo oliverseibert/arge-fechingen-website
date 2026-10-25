@@ -1,18 +1,25 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SeoService } from '../../core/seo.service';
+import { PageHeader } from '../../shared/page-header';
 import { Todo } from '../../shared/todo';
 
 @Component({
   selector: 'app-arge',
-  imports: [Todo],
+  imports: [PageHeader, Todo],
   template: `
-    <article class="page container prose">
-      <h1>Die ARGE</h1>
-      <p class="lead">Die Arbeitsgemeinschaft Fechingen stellt sich vor.</p>
-
-      <h2>Chronik</h2>
-      <app-todo>Chronik von Günter Nieser einfügen</app-todo>
-    </article>
+    <app-page-header
+      crumbLabel="Die ARGE"
+      title="Die"
+      accent="ARGE"
+      intro="Die Arbeitsgemeinschaft Fechingen stellt sich vor."
+    />
+    <div class="container section">
+      <article class="prose">
+        <span class="eyebrow">Geschichte</span>
+        <h2 class="section-title">Chronik</h2>
+        <app-todo>Chronik von Günter Nieser einfügen</app-todo>
+      </article>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SeoService } from '../../core/seo.service';
+import { Icon } from '../../shared/icon';
+import { PageHeader } from '../../shared/page-header';
 import { Todo } from '../../shared/todo';
 import { CLUB_ACTIVITIES, CLUBS, ClubActivity, WEEKDAYS } from './vereine.data';
 
 @Component({
   selector: 'app-vereine',
-  imports: [Todo],
+  imports: [PageHeader, Icon, Todo],
   templateUrl: './vereine.html',
   styleUrl: './vereine.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

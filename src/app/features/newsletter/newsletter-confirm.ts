@@ -9,30 +9,33 @@ import {
 import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../core/supabase.service';
 import { SeoService } from '../../core/seo.service';
+import { PageHeader } from '../../shared/page-header';
 
 @Component({
   selector: 'app-newsletter-confirm',
-  imports: [RouterLink],
+  imports: [RouterLink, PageHeader],
   template: `
-    <article class="page container prose">
-      <h1>Newsletter-Anmeldung</h1>
-      @switch (state()) {
-        @case ('loading') {
-          <p aria-live="polite">Ihre Anmeldung wird bestätigt …</p>
+    <app-page-header title="Newsletter-" accent="Anmeldung" />
+    <div class="container section">
+      <div class="prose">
+        @switch (state()) {
+          @case ('loading') {
+            <p aria-live="polite">Ihre Anmeldung wird bestätigt …</p>
+          }
+          @case ('success') {
+            <p class="alert alert-success" role="status">
+              Vielen Dank! Ihre Anmeldung zum Newsletter ist bestätigt.
+            </p>
+          }
+          @case ('error') {
+            <p class="alert alert-error" role="alert">
+              Der Bestätigungslink ist ungültig oder abgelaufen. Bitte melden Sie sich erneut an.
+            </p>
+          }
         }
-        @case ('success') {
-          <p class="alert alert-success" role="status">
-            Vielen Dank! Ihre Anmeldung zum Newsletter ist bestätigt.
-          </p>
-        }
-        @case ('error') {
-          <p class="alert alert-error" role="alert">
-            Der Bestätigungslink ist ungültig oder abgelaufen. Bitte melden Sie sich erneut an.
-          </p>
-        }
-      }
-      <p><a routerLink="/neues">Zu den Neuigkeiten</a></p>
-    </article>
+        <p><a routerLink="/neues">Zu den Neuigkeiten</a></p>
+      </div>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

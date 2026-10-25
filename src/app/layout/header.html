@@ -1,0 +1,59 @@
+<header class="header">
+  <div class="container header-inner">
+    <app-brand />
+
+    <nav class="nav-desktop" aria-label="Hauptnavigation">
+      <ul>
+        @for (item of nav; track item.path) {
+          <li>
+            <a [routerLink]="item.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{
+              item.label
+            }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <button
+      type="button"
+      class="menu-button"
+      [attr.aria-expanded]="open()"
+      aria-controls="mobile-nav"
+      (click)="open.set(!open())"
+    >
+      <app-icon [name]="open() ? 'x' : 'menu'" />
+      <span class="visually-hidden">{{ open() ? 'Menü schließen' : 'Menü öffnen' }}</span>
+    </button>
+  </div>
+</header>
+
+<div class="backdrop" [class.visible]="open()" (click)="open.set(false)" aria-hidden="true"></div>
+<nav
+  id="mobile-nav"
+  class="drawer"
+  [class.open]="open()"
+  aria-label="Hauptnavigation (mobil)"
+  [attr.inert]="open() ? null : ''"
+>
+  <ul>
+    <li>
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+      >
+        Startseite
+        <app-icon name="arrow-right" />
+      </a>
+    </li>
+    @for (item of nav; track item.path) {
+      <li>
+        <a [routerLink]="item.path" routerLinkActive="active" ariaCurrentWhenActive="page">
+          {{ item.label }}
+          <app-icon name="arrow-right" />
+        </a>
+      </li>
+    }
+  </ul>
+</nav>
