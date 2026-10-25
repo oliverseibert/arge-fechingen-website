@@ -15,7 +15,9 @@ import { RouterLink } from '@angular/router';
       <img src="/assets/logo/wappen-fechingen-klein.png" alt="" width="36" height="41" />
       <span class="name" aria-hidden="true">
         <span class="word"><strong>ARGE</strong> <em>Fechingen</em></span>
-        <small>Arbeitsgemeinschaft</small>
+        <small
+          ><span class="long">Arbeitsgemeinschaft </span>Fechinger Ortsvereine e.&nbsp;V.</small
+        >
       </span>
     </a>
   `,
@@ -53,9 +55,17 @@ import { RouterLink } from '@angular/router';
       color: var(--color-primary);
     }
     small {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--color-text-muted);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    // Auf schmalen Displays nur „Fechinger Ortsvereine e. V.“
+    .long {
+      display: none;
+      @media (min-width: 30rem) {
+        display: inline;
+      }
     }
     .inverse {
       color: #fff;

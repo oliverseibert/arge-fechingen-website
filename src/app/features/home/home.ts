@@ -62,7 +62,7 @@ export class Home {
     inject(SeoService).set({
       path: '/',
       description:
-        'Die ARGE (Arbeitsgemeinschaft) Fechingen – Neuigkeiten, Termine und Informationen rund um Fechingen.',
+        'Die ARGE – Arbeitsgemeinschaft Fechinger Ortsvereine e. V.: Neuigkeiten, Termine und Informationen rund um Fechingen.',
     });
   }
 }

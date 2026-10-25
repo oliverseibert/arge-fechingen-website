@@ -1,0 +1,97 @@
+<app-page-header
+  crumbLabel="Die ARGE"
+  title="Die"
+  accent="ARGE"
+  eyebrow="Arbeitsgemeinschaft Fechinger Ortsvereine e. V."
+  intro="Seit mehr als 50 Jahren arbeiten die Fechinger Ortsvereine in der ARGE zusammen – für Kultur, Brauchtum und ein lebendiges Dorfleben."
+/>
+
+<div class="container section">
+  <section class="about" aria-labelledby="wer">
+    <div class="prose">
+      <span class="eyebrow">Über uns</span>
+      <h2 id="wer" class="section-title">Wer wir sind</h2>
+      <p>
+        Die <strong>Arbeitsgemeinschaft Fechinger Ortsvereine e.&nbsp;V.</strong> – kurz ARGE – ist
+        ein gemeinnütziger Verein. Sie steht allen Vereinen, Verbänden und Institutionen offen, die
+        in Fechingen tätig sind, und bringt sie unter einem Dach zusammen.
+      </p>
+      <p>
+        Mit ihren Festen und Projekten ist die ARGE seit Jahrzehnten eine feste Größe im Dorf: Sie
+        nimmt aktiv am Dorfleben teil und hat viele Spuren im Ortsbild hinterlassen – vom
+        Gänsegretelbrunnen bis zu den Ortsschildern des „Gänsegreteldorfs“.
+      </p>
+      <p>
+        Welche Vereine in Fechingen aktiv sind, finden Sie unter
+        <a routerLink="/vereine">Vereine</a>; wer die ARGE führt, unter
+        <a routerLink="/vorstand">Der Vorstand</a>.
+      </p>
+    </div>
+  </section>
+
+  <section aria-labelledby="zweck">
+    <span class="eyebrow">Satzung</span>
+    <h2 id="zweck" class="section-title">Was die ARGE tut</h2>
+    <ul class="grid">
+      @for (goal of goals; track goal.title) {
+        <li class="card item">
+          <span class="icon-tile"><app-icon [name]="goal.icon" /></span>
+          <h3>{{ goal.title }}</h3>
+          <p class="muted">{{ goal.text }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="events" aria-labelledby="feste">
+    <span class="eyebrow">Im Jahreslauf</span>
+    <h2 id="feste" class="section-title">Unsere Feste</h2>
+    <p class="lead events-lead">
+      Aus dem Dorfgeschehen nicht mehr wegzudenken – aktuelle Termine finden Sie unter
+      <a routerLink="/neues">Neues</a>.
+    </p>
+    <ul class="event-list">
+      @for (event of events; track event.title) {
+        <li class="card event">
+          <span class="icon-tile"><app-icon [name]="event.icon" /></span>
+          <div>
+            <h3>{{ event.title }}</h3>
+            <p class="muted">{{ event.text }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby="projekte">
+    <span class="eyebrow">Spuren im Ort</span>
+    <h2 id="projekte" class="section-title">Projekte der ARGE</h2>
+    <ul class="grid">
+      @for (project of projects; track project.title) {
+        <li class="card item">
+          <span class="icon-tile"><app-icon [name]="project.icon" /></span>
+          <h3>{{ project.title }}</h3>
+          <p class="muted">{{ project.text }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="chronik" aria-labelledby="chronik">
+    <span class="eyebrow">Geschichte</span>
+    <h2 id="chronik" class="section-title">Chronik</h2>
+    <app-todo>Chronik von Günter Nieser einfügen</app-todo>
+  </section>
+
+  <footer class="sources">
+    <h2>Quelle</h2>
+    <p>
+      <a
+        href="https://www.saarbruecken.de/media/download-603518d60491d"
+        target="_blank"
+        rel="noopener"
+        >Landeshauptstadt Saarbrücken: Stadtteilporträt Fechingen (PDF)</a
+      >
+    </p>
+  </footer>
+</div>

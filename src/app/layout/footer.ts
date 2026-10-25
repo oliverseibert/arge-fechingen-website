@@ -41,7 +41,7 @@ import { MAIN_NAV } from './header';
         </nav>
       </div>
       <div class="container bottom">
-        <p>© {{ year }} ARGE Fechingen</p>
+        <p>© {{ year }} ARGE – Arbeitsgemeinschaft Fechinger Ortsvereine e. V.</p>
       </div>
     </footer>
   `,
